@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #552B36; /* Main background color */
+    color: #FFCF9C; /* Text color */
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #C66864; /* Header bar color */
+    padding: 10px 0;
+    text-align: center;
+    display: flex; /* Use flexbox for easier alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Align items horizontally */
+}
+
+.header img {
+    height: 80px; /* Adjust the height of the logo as needed */
+    display: inline-block; /*Display the logo next to the brand name*/
+    margin-right: 10px; /* Add margin to the right to create space between logo and text */
+}  
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+    display: inline-block; /* Display the brand name as an inline block */
+    vertical-align: middle; /* Align the brand name vertically with the logo */
+}
+
+.wrapper-main {
+    width: 300px;
+    margin: 180px auto; /* Center the form vertically */
+    background-color: #FFF; /* Background color for the form */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.linkStyle {
+    margin: 0px;
+    padding: 0px;
+}
+
+a:link, a:visited {
+    background-color: #C66864;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+form {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="password"],
+button{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #C66864; /* Reddish button color */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #AC5450; /* Darker reddish color on hover */
+}
+
+.create-account-link {
+    color: #C66864; /* Text color */
+    text-decoration: underline; /* Underline the text to indicate it's clickable */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.create-account-link:hover {
+    color: #AC5450; /* Darken text color on hover */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+.paragraphStyle{
+    background-color: #C66864;
+    color: antiquewhite;
+    text-align: center;
+    width: 70%;
+    border-radius: 25px;
+}
