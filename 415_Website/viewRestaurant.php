@@ -51,6 +51,33 @@
                 </td>
             </tr>
         </table>
+
+        <?php
+            $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+            $username = 'admin';
+            $password = 'password';
+            $dbname = 'databaseproject';
+  
+            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            if ($conn -> connect_error){
+              die("Connection Failed:" .mysqli_connect_error());
+            }
+            
+            $sql = "SELECT R.rname, R.rdesc FROM Resturants R";
+            // maybe include a thingy above like, WHERE R.rname = NAME_FROM_DROPDOWN_LIST
+            $result = $conn -> query($sql);
+  
+            if(mysqli_num_rows($result) != 0){
+              echo "<table><tbody>";
+              echo "<tr style = 'font-weight: bold;'><td>Rest Name</td><td>Rest Desc</td></tr>";
+              while ($row = $result->fetch_assoc()){
+                  // adds a new row to the table (a course)
+                  echo "<tr><td>". $row["rname"] . "</td><td>" . $row["rdesc"] . "</td></tr>";
+              }
+              echo "</tbody></table>";
+            }
+  
+          ?>
     </form>
   </body>
 </html>
