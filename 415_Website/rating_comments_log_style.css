@@ -1,0 +1,90 @@
+/* rating_comments_log_style.css */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #552B36; /* Main background color */
+  color: #FFCF9C; /* Text color */
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #C66864; /* Header bar color */
+  padding: 10px 0;
+  text-align: center;
+  display: flex; /* Use flexbox for easier alignment */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Align items horizontally */
+}
+
+.header img {
+  height: 80px; /* Adjust the height of the logo as needed */
+  display: inline-block; /* Display the logo next to the brand name*/
+  margin-right: 10px; /* Add margin to the right to create space between logo and text */
+}  
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block; /* Display the brand name as an inline block */
+  vertical-align: middle; /* Align the brand name vertically with the logo */
+}
+
+/* Styles for the container */
+.container {
+  display: flex;
+  height: 100vh; /* Full height of the viewport */
+}
+
+/* Styles for the restaurant list */
+.restaurant-list {
+  width: 60%; /* Three-fifths of the container width */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+/* Styles for the static box */
+.static-box {
+  width: 40%; /* Two-fifths of the container width */
+  padding: 20px;
+  border: 1px solid #C66864; /* Reddish tone border */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  background-color: #FFF; /* White background color */
+  color: #552B36;
+  position: relative;
+  
+}
+
+/* Styles for the reviews header */
+.static-box h2 {
+  text-align: center; /* Center the header */
+  margin: 0 0 20px 0; /* Add some margin below the header */
+  color: #C66864; /* Reddish tone color */
+  border-bottom: 2px solid #C66864; /* Reddish tone border */
+}
+
+/* Styles for individual comments */
+.comment {
+  background-color: #F0F0F0; /* Light gray background color for comments */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  
+}
+
+/* Styles for the share opinion button */
+.share-opinion-button {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px; /* Add margin at the bottom */
+  padding: 10px 20px;
+  background-color: #C66864; /* Reddish color */
+  color: #FFCF9C; /* Yellowish tone */
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.share-opinion-button:hover {
+  background-color: #AC5450; /* Darken button color on hover */
+}
