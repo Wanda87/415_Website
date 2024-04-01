@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php
+  $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+  $username = 'admin';
+  $password = 'password';
+  $dbname = 'databaseproject';
+
+  $conn = mysqli_connect($servername, $username, $password, $dbname);
+  if ($conn -> connect_error){
+    die("Connection Failed:" .mysqli_connect_error());
+  }
+?>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -24,60 +36,55 @@
 
     <br>
 
-    <form>
-        <label for = "resturants">Select a Restaurant: </label>
-        <select name = "rests">
-            <option>Rest_1</option>
-            <option>Rest_2</option>
-            <option>Rest_3</option>
-        </select>
-        
-        <div>
-          <p style = "text-align: left;">Restaurant: REST</p> <!--REST needs to be replaced with a php var later-->
-        </div>
-        <table>
-            <tr>
-                <td style = "position: relative;">
-                    <div class = "container">
-                        <img src = "steak.jpg">
-                        <p>Sirloin Steak</p>
-                    </div>
-                </td>
-                <td style = "position: relative;">
-                    <div class = "container">
-                        <img src = "soup.jpg">
-                        <p>Mushroom Soup</p>
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <form action = "viewRestaurantResult.php" method = "post">
+      <label for = "restaurants">Select a Restaurant: </label>
+      <?php
+        $restChoice = "Not Selected";
 
-        <?php
-            $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
-            $username = 'admin';
-            $password = 'password';
-            $dbname = 'databaseproject';
-  
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-            if ($conn -> connect_error){
-              die("Connection Failed:" .mysqli_connect_error());
-            }
-            
-            $sql = "SELECT R.rname, R.rdesc FROM Resturants R";
-            // maybe include a thingy above like, WHERE R.rname = NAME_FROM_DROPDOWN_LIST
-            $result = $conn -> query($sql);
-  
-            if(mysqli_num_rows($result) != 0){
-              echo "<table><tbody>";
-              echo "<tr style = 'font-weight: bold;'><td>Rest Name</td><td>Rest Desc</td></tr>";
-              while ($row = $result->fetch_assoc()){
-                  // adds a new row to the table (a course)
-                  echo "<tr><td>". $row["rname"] . "</td><td>" . $row["rdesc"] . "</td></tr>";
-              }
-              echo "</tbody></table>";
-            }
-  
-          ?>
+        $sql = "SELECT R.rid, R.rname FROM Resturants R";
+        $result = $conn -> query($sql);
+
+        // dropdown menu for resturants
+        if(mysqli_num_rows($result) != 0){
+          echo "<select name = 'restaurants'>";
+
+          while ($row = $result->fetch_assoc()){
+            echo "<option value = '" . $row["rid"] . "'>". $row["rname"] ."</option>";
+          }
+          echo "</select> <input type = 'submit'";
+
+          $restChoice = $_POST['restaurants'];
+        }
+        
+        //$restChoice = $_POST['restaurants'];
+
+        if (is_int($restChoice)){
+          $sql = "SELECT R.rname FROM Resturants R WHERE R.rid = '$restChoice'";
+          $result = $conn -> query($sql);
+          $currentRestName = $result -> fetch_assoc();
+        }
+      ?>
     </form>
+      
+      <?php
+
+        echo "<div><p style = 'text-align: left;'>Restaurant: $restChoice</p></div>";
+
+        //table for displaying restaurant items
+
+        $restSQL = "SELECT I.itemImage, I.itemname FROM Items I, Resturants R WHERE R.rid = '$restChoice'";
+        // maybe include a thingy above like, WHERE R.rname = NAME_FROM_DROPDOWN_LIST
+        $restResult = $conn -> query($restSQL);
+
+        if(mysqli_num_rows($restResult) != 0){
+          echo "<table><tbody>";
+          while ($row = $restResult->fetch_assoc()){
+              // adds a new row to the table (an item)
+              echo "<tr><td>". $row["itemImage"] . "</td><td>" . $row["itemname"] . "</td></tr>";
+          }
+          echo "</tbody></table>";
+        }
+        
+      ?>
   </body>
 </html>
