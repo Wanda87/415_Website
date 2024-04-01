@@ -1,0 +1,101 @@
+/* comment_style.css */
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #552B36; /* Main background color */
+  color: #FFCF9C; /* Text color */
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure header is centered */
+.header {
+  background-color: #C66864; /* Header bar color */
+  padding: 10px 0;
+  text-align: center;
+  display: flex; /* Use flexbox for easier alignment */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Align items horizontally */
+
+}
+
+.header img {
+  height: 80px; /* Adjust the height of the logo as needed */
+  display: inline-block; /* Display the logo next to the brand name */
+  margin-right: 10px; /* Add margin to the right to create space between logo and text */
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block; /* Display the brand name as an inline block */
+  vertical-align: middle; /* Align the brand name vertically with the logo */
+}
+
+/* Center the comment box and submit button */
+.rating-box textarea {
+  max-width: 80%; /* Set the maximum width */
+  height: 80%; /* Set the height to 80% of the rating box height */
+  resize: none; /* Disable resizing */
+}
+
+/* Styles for the submit button */
+.rating-box button {
+  display: block;
+  margin: 10px auto; /* Adjust margin as needed */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #C66864; /* Change button background color */
+  color: white; /* Change button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Add button border radius */
+  cursor: pointer;
+  
+}
+
+.rating-box button:hover {
+  background-color: #AC5450; /* Darken button color on hover */
+}
+
+/* Set maximum width and height for the textarea*/
+.rating-box textarea {
+  
+  margin: 20px auto; /*center the textarea horizontally*/
+  width: 100%; /* Set the initial width to fill the available space */
+  max-width: 700px; /* Set the maximum width */
+  min-width: 200px;
+  max-height: 200px; /* Set the maximum height */
+  min-height: 60px;
+  resize: vertical; /* allow  vertical resizing*/
+}
+
+/* Styles for the rating box */
+.rating-box {
+  position: absolute;
+  /*Move top-left corner of the rating-box to the center of its containing element*/
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /*center rating-box horizontally and vertically*/
+  background: White;
+  padding: 25px 50px 35px;
+  border-radius: 25px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  color: #C66864;
+  text-align: center; /* Center the text content */
+  width: 50%; /*set default width (take up 50% of the screen)*/
+ 
+}
+
+.rating-box header {
+  font-size: 22px;
+  color: #552B36;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+
+
+
