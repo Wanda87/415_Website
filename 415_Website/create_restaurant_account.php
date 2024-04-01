@@ -1,5 +1,52 @@
 <?php
-  // php login authentication stuff will go here
+
+$servername = "database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
+$username = "admin";
+$password = "password";
+$database = "databaseproject";
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['manager_name'];
+    $user = $_POST['username'];
+    $pass =  $_POST['password'];
+    $confirmPass = $_POST['confirm_password'];
+
+    if ($pass !== $confirmPass) {
+        echo "Passwords do not match";
+    } else {
+
+        $check = $conn->prepare("SELECT mname FROM Managers WHERE muser = ?");
+        $check->bind_param("s", $user);
+        $check->execute();
+        $check->store_result();
+        
+        if ($check->num_rows > 0) {
+            $showNotification = true;
+        } else {
+            $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
+
+            $stmt = $conn->prepare("INSERT INTO Managers (mname, muser, mpass) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $name, $user, $hashedPass);
+            $result = $stmt->execute();
+
+            if ($result) {
+                header("Location: login.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        }
+        $check->close();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -9,16 +56,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Create Restaurant Owner Account</title>
-    <link rel="stylesheet" href = "style.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class = "header">
+     
+    <div class="header">
       <img src="michelinEatsLogo.png" alt="Logo"> 
       <h1>Michelin Eats</h1>
     </div>
-
+  
     <section class="wrapper-main">
-      <form action="create_account_handler.php" method="post">
+    <?php if (isset($showNotification) && $showNotification): ?>
+        <a href="#" class="notification">
+            <span>That username already exists, please select another username.</span>
+            <span class="badge"></span>
+        </a>
+    <?php endif; ?>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+      <br></br>
         <label for="manager_name">Manager Name:</label>
         <input required type="text" id="manager_name" name="manager_name" placeholder="Enter manager's name">
         
@@ -35,8 +90,8 @@
         <input type="hidden" name="account_type" value="restaurant_owner">
       </form>
 
-      <form action = "create_account.php">
-        <input type = "submit" value = "Go Back"/>
+      <form action="create_account.php">
+        <input type="submit" value="Go Back"/>
       </form>
     </section>
 

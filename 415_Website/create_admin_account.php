@@ -19,20 +19,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($pass !== $confirmPass) {
         echo "Passwords do not match";
     } else {
-        $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
-
-        $stmt = $conn->prepare("INSERT INTO Admins( auser, apass) VALUES ( ?, ?)");
-        $stmt->bind_param("ss",  $user, $hashedPass);
-        $result = $stmt->execute();
-
-        if ($result) {
-            echo "New record created successfully";
-            header("Location: login.php");
-            exit();
+        $check = $conn->prepare("SELECT auser FROM Admins WHERE auser = ?");
+        $check->bind_param("s", $user);
+        $check->execute();
+        $check->store_result();
+        
+        if ($check->num_rows > 0) {
+          $showNotification = true;
         } else {
-            echo "Error: " . $stmt->error;
+            $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
+
+            $stmt = $conn->prepare("INSERT INTO Admins(auser, apass) VALUES (?, ?)");
+            $stmt->bind_param("ss", $user, $hashedPass);
+            $result = $stmt->execute();
+
+            if ($result) {
+                echo "New record created successfully";
+                header("Location: login.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
         }
-        $stmt->close();
+        $check->close();
     }
 
 }
@@ -40,25 +50,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Create Admin Account</title>
-    <link rel="stylesheet" href = "style.css">
-  </head>
-  <body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <div class="header">
-      <img src="michelinEatsLogo.png" alt="Logo"> 
-      <h1>Michelin Eats</h1>
-    </div>
+<div class="header">
+    <img src="michelinEatsLogo.png" alt="Logo">
+    <h1>Michelin Eats</h1>
+</div>
 
-    <section class="wrapper-main">
+<section class="wrapper-main">
+<?php if (isset($showNotification) && $showNotification): ?>
+        <a href="#" class="notification">
+            <span>That username already exists, please select another username.</span>
+            <span class="badge"></span>
+        </a>
+        <br></br>
+    <?php endif; ?>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="username">Username:</label>
         <input required type="text" id="username" name="username" placeholder="Enter your username">
-        
+
         <label for="password">Password:</label>
         <input required type="password" id="password" name="password" placeholder="Enter your password">
 
@@ -66,12 +82,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input required type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password">
 
         <button type="submit">Create Admin Account</button>
-      </form>
+    </form>
 
-      <form action = "create_account.php">
-        <input type = "submit" value = "Go Back"/>
-      </form>
-    </section>
+    <form action="create_account.php">
+        <input type="submit" value="Go Back"/>
+    </form>
+</section>
 
-  </body>
+</body>
 </html>

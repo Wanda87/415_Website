@@ -20,22 +20,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($pass !== $confirmPass) {
         echo "Passwords do not match";
     } else {
-        $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $user, $hashedPass);
-        $result = $stmt->execute();
-
-        if ($result) {
-            echo "New record created successfully";
-            header("Location: login.php");
-            exit();
+        $check = $conn->prepare("SELECT cname FROM Customers WHERE cuser = ?");
+        $check->bind_param("s", $user);
+        $check->execute();
+        $check->store_result();
+        
+        if ($check->num_rows > 0) {
+            $showNotification = true;
         } else {
-            echo "Error: " . $stmt->error;
-        }
-        $stmt->close();
-    }
+            $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
 
+            $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $name, $user, $hashedPass);
+            $result = $stmt->execute();
+
+            if ($result) {
+                echo "New record created successfully";
+                header("Location: login.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        }
+        $check->close();
+    }
 }
 
 ?>
@@ -56,8 +66,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <img src="michelinEatsLogo.png" alt="Logo">
         <h1>Michelin Eats</h1>
     </div>
+    
 
     <section class="wrapper-main">
+    <?php if (isset($showNotification) && $showNotification): ?>
+        <a href="#" class="notification">
+            <span>That username already exists, please select another username.</span>
+            <span class="badge"></span>
+        </a>
+    <?php endif; ?>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="name">Name:</label>
             <input required type="text" id="name" name="name" placeholder="Enter your name">
