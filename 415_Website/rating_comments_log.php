@@ -11,6 +11,7 @@
 <div class="header">
     <img src="michelinEatsLogo.png" alt="Logo"> 
     <h1>Michelin Eats</h1>
+    <a href="login.php" class="login-button">Login</a> <!-- Add login button -->
 </div>
   
 <div class="container">
