@@ -3,7 +3,7 @@
   $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
   $password = 'password';
-  $dbname = 'databaseproject';
+  $dbname = 'databaseproj';
 
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   if ($conn -> connect_error){
@@ -36,55 +36,25 @@
 
     <br>
 
-    <form action = "viewRestaurantResult.php" method = "post">
+    <form action = "viewRestaurantResult.php" method = "post"> <!-- Page will be directed to result -->
       <label for = "restaurants">Select a Restaurant: </label>
-      <?php
-        $restChoice = "Not Selected";
 
-        $sql = "SELECT R.rid, R.rname FROM Resturants R";
+      <?php
+        $sql = "SELECT R.rid, R.rname FROM Restaurants R";
         $result = $conn -> query($sql);
 
-        // dropdown menu for resturants
+        // creating dropdown menu for resturants
         if(mysqli_num_rows($result) != 0){
           echo "<select name = 'restaurants'>";
 
           while ($row = $result->fetch_assoc()){
             echo "<option value = '" . $row["rid"] . "'>". $row["rname"] ."</option>";
           }
-          echo "</select> <input type = 'submit'";
-
-          $restChoice = $_POST['restaurants'];
-        }
-        
-        //$restChoice = $_POST['restaurants'];
-
-        if (is_int($restChoice)){
-          $sql = "SELECT R.rname FROM Resturants R WHERE R.rid = '$restChoice'";
-          $result = $conn -> query($sql);
-          $currentRestName = $result -> fetch_assoc();
+          
+          echo "</select> <input type='submit' name='submit' value='Enter'/>";
         }
       ?>
     </form>
-      
-      <?php
 
-        echo "<div><p style = 'text-align: left;'>Restaurant: $restChoice</p></div>";
-
-        //table for displaying restaurant items
-
-        $restSQL = "SELECT I.itemImage, I.itemname FROM Items I, Resturants R WHERE R.rid = '$restChoice'";
-        // maybe include a thingy above like, WHERE R.rname = NAME_FROM_DROPDOWN_LIST
-        $restResult = $conn -> query($restSQL);
-
-        if(mysqli_num_rows($restResult) != 0){
-          echo "<table><tbody>";
-          while ($row = $restResult->fetch_assoc()){
-              // adds a new row to the table (an item)
-              echo "<tr><td>". $row["itemImage"] . "</td><td>" . $row["itemname"] . "</td></tr>";
-          }
-          echo "</tbody></table>";
-        }
-        
-      ?>
   </body>
 </html>

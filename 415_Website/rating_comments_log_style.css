@@ -8,27 +8,48 @@ body {
   padding: 0;
 }
 
+
+
 .header {
   background-color: #C66864; /* Header bar color */
-  padding: 10px 0;
+  padding: 10px 20px; /* Increased padding */
   text-align: center;
   display: flex; /* Use flexbox for easier alignment */
   align-items: center; /* Align items vertically */
-  justify-content: center; /* Align items horizontally */
+  justify-content: center; /* Center items horizontally */
+  position: relative; /* Position relative for absolute positioning of login button */
 }
+
 
 .header img {
   height: 80px; /* Adjust the height of the logo as needed */
-  display: inline-block; /* Display the logo next to the brand name*/
   margin-right: 10px; /* Add margin to the right to create space between logo and text */
-}  
+}
+
 
 .header h1 {
   margin: 0;
   font-size: 32px;
   font-weight: bold;
-  display: inline-block; /* Display the brand name as an inline block */
-  vertical-align: middle; /* Align the brand name vertically with the logo */
+  
+}
+
+
+/* Styles for login button */
+.login-button {
+  background-color: #C66864; /* Reddish color */
+  color: #FFCF9C; /* Yellowish tone */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: underline; /* Underline by default */
+  font-weight: bold;
+}
+
+
+
+
+.login-button:hover {
+  background-color: #9E4C49; /* Darken button color on hover */
 }
 
 /* Styles for the container */
@@ -88,3 +109,4 @@ body {
 .share-opinion-button:hover {
   background-color: #AC5450; /* Darken button color on hover */
 }
+
