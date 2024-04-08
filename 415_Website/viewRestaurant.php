@@ -3,7 +3,7 @@
   $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
   $password = 'password';
-  $dbname = 'databaseproject';
+  $dbname = 'databaseproj';
 
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   if ($conn -> connect_error){
@@ -40,7 +40,7 @@
       <label for = "restaurants">Select a Restaurant: </label>
 
       <?php
-        $sql = "SELECT R.rid, R.rname FROM Resturants R";
+        $sql = "SELECT R.rid, R.rname FROM Restaurants R";
         $result = $conn -> query($sql);
 
         // creating dropdown menu for resturants
