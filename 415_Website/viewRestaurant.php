@@ -36,7 +36,7 @@
 
     <br>
 
-    <form action = "viewRestaurantResult.php" method = "post"> <!-- Page will be directed to result -->
+    <form action = "rating_comments_log.php" method = "post"> <!-- Page will be directed to result -->
       <label for = "restaurants">Select a Restaurant: </label>
 
       <?php
