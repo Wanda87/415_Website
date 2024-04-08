@@ -3,7 +3,7 @@
   $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
   $password = 'password';
-  $dbname = 'databaseproject';
+  $dbname = 'databaseproj';
 
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   if ($conn -> connect_error){
@@ -40,7 +40,7 @@
       
       <?php // displaying restaurant item table:
         // grabbing the name based off of $restChoice
-        $sql = "SELECT R.rname FROM Resturants R WHERE R.rid = '$restChoice'";
+        $sql = "SELECT R.rname FROM Restaurants R WHERE R.rid = '$restChoice'";
         $result = $conn -> query($sql);
         $row = $result ->fetch_assoc();
 
@@ -48,13 +48,17 @@
 
         echo "<div><p style = 'text-align: left;'>Restaurant: " . $row['rname'] . "</p></div>";
         
-        // grabbing restaurant desc for now (grabbing the image gives me a huge string of chars???)
-        $restSQL = "SELECT R.headImage, R.rdesc FROM Resturants R WHERE R.rid = '$restChoice'";
+        // grabbing restaurant desc and image
+        $restSQL = "SELECT R.headImage, R.rdesc FROM Restaurants R WHERE R.rid = '$restChoice'";
         $restResult = $conn -> query($restSQL);
 
         if(mysqli_num_rows($restResult) != 0){
           $row = $restResult->fetch_assoc();
+          $image = $row["headImage"];
+
           echo "<div>Description: ". $row["rdesc"] . "</div>";
+
+          echo "<img src= 'data:image/jpeg;base64, " . base64_encode($image) . "'/>";
         }
         else
             echo "Error displaying restaurant.";
@@ -62,14 +66,14 @@
         //table for displaying restaurant items
         echo "<br>Available Menu Items:<br>";
 
-        $restSQL = "SELECT I.itemImage, I.itemname FROM Items I WHERE I.rid = '$restChoice'";
+        $restSQL = "SELECT I.itemImage, I.itemname, I.iteamdesc FROM Items I WHERE I.rid = '$restChoice'";
         $restResult = $conn -> query($restSQL);
 
         if(mysqli_num_rows($restResult) != 0){
           echo "<table><tbody>";
           while ($row = $restResult->fetch_assoc()){
               // adds a new row to the table (an item)
-              echo "<tr><td>". $row["itemImage"] . "</td><td>" . $row["itemname"] . "</td></tr>";
+              echo "<tr><td style = 'padding: 0 15px;'>". $row["itemname"] . "</td><td>" . $row["iteamdesc"] . "</td></tr>";
           }
           echo "</tbody></table>";
         }
