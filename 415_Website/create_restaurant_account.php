@@ -1,9 +1,10 @@
 <?php
 
+
 $servername = "database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
-$database = "databaseproject";
+$database = "databaseproj";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -70,10 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="#" class="notification">
             <span>That username already exists, please select another username.</span>
             <span class="badge"></span>
+            <br></br>
         </a>
     <?php endif; ?>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-      <br></br>
+     
         <label for="manager_name">Manager Name:</label>
         <input required type="text" id="manager_name" name="manager_name" placeholder="Enter manager's name">
         

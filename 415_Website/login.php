@@ -1,3 +1,37 @@
+<?php
+
+$servername = "database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
+$username = "admin";
+$password = "password";
+$database = "databaseproj";
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $user = $_POST['user'];
+    $pass =  $_POST['pwd'];
+
+    $check = $conn->prepare("SELECT cname FROM Customers WHERE cuser = ?");
+    $check->bind_param("s", $user);
+    $check->execute();
+    $check->store_result();
+        
+    if ($check->num_rows > 0) {
+        print("True");
+    } else {
+        print("True");
+    }
+} 
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

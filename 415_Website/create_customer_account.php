@@ -3,7 +3,7 @@
 $servername = "database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
-$database = "databaseproject";
+$database = "databaseproj";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -73,7 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="#" class="notification">
             <span>That username already exists, please select another username.</span>
             <span class="badge"></span>
+       
         </a>
+        <br></br>
     <?php endif; ?>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="name">Name:</label>
@@ -89,7 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input required type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password">
 
             <button type="submit">Create Customer Account</button>
+            
         </form>
+        <form action="create_account.php">
+        <input type="submit" value="Go Back"/>
+      </form>
     </section>
 
 </body>

@@ -1,9 +1,10 @@
 <?php
 
+
 $servername = "database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
-$database = "databaseproject";
+$database = "databaseproj";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
