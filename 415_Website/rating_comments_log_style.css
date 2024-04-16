@@ -110,3 +110,11 @@ body {
   background-color: #AC5450; /* Darken button color on hover */
 }
 
+a:link, a:visited {
+  background-color: #C66864;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
