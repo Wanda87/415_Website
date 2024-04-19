@@ -3,7 +3,11 @@
 $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
+<<<<<<< HEAD
 $database = "softwareproject";
+=======
+$database = "dsoftwareproject";
+>>>>>>> 0ce4f2cf00d67c79d01e6cc799ecb8192b6b7f80
 
 $conn = new mysqli($servername, $username, $password, $database);
 
