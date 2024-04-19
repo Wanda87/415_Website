@@ -1,10 +1,9 @@
 <?php
 
-
-$servername = "database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
+$servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
-$database = "databaseproj";
+$database = "softwareproject";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -13,6 +12,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['username'];
     $user = $_POST['username'];
     $pass =  $_POST['password'];
     $confirmPass = $_POST['confirm_password'];
@@ -20,33 +20,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($pass !== $confirmPass) {
         echo "Passwords do not match";
     } else {
-        $check = $conn->prepare("SELECT auser FROM Admins WHERE auser = ?");
+
+        $check = $conn->prepare("SELECT cname FROM Customers WHERE cuser = ?");
         $check->bind_param("s", $user);
         $check->execute();
         $check->store_result();
-        
+
         if ($check->num_rows > 0) {
-          $showNotification = true;
+            $showNotification = true;
         } else {
-            $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
-
-            $stmt = $conn->prepare("INSERT INTO Admins(auser, apass) VALUES (?, ?)");
-            $stmt->bind_param("ss", $user, $hashedPass);
-            $result = $stmt->execute();
-
-            if ($result) {
-                echo "New record created successfully";
-                header("Location: login.php");
-                exit();
+            $check = $conn->prepare(" SELECT aname FROM Admins WHERE auser = ? ");
+        
+            $check->bind_param("s", $user);
+            $check->execute();
+            $check->store_result();
+        
+            if ($check->num_rows > 0) {
+                $showNotification = true;
             } else {
-                echo "Error: " . $stmt->error;
+                $check = $conn->prepare(" SELECT mname  FROM Managers  WHERE muser = ?  ");
+                $check->bind_param("s", $user);
+                $check->execute();
+                $check->store_result();
+        
+                if ($check->num_rows > 0) {
+                    $showNotification = true;
+                } else {
+                    $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
+        
+                    $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
+                    $stmt->bind_param("sss", $name, $user, $hashedPass);
+                    $result = $stmt->execute();
+        
+                    if ($result) {
+                        echo "New record created successfully";
+                        header("Location: login.php");
+                        exit();
+                    } else {
+                        echo "Error: " . $stmt->error;
+                    }
+                    $stmt->close();
+                }
             }
-            $stmt->close();
         }
+        
         $check->close();
     }
-
 }
+
 
 ?>
 <!DOCTYPE html>
