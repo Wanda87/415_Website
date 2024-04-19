@@ -1,8 +1,8 @@
 <?php
-    $servername = 'database-1.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+    $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
     $username = 'admin';
     $password = 'password';
-    $dbname= 'databaseproj';
+    $dbname= 'softwareproject';
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     if ($conn -> connect_error){
@@ -10,6 +10,8 @@
     }
 
     $restChoice = $_POST['restaurants']; // rid taken from viewRestaurant.php dropdown
+    $cid = 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -86,9 +88,25 @@
 
             <div class="static-box">
                 <h2>Reviews</h2>
+                
+                <div><form method = "post">
+                    <!-- "Share your opinion" button -->
 
-                <!-- "Share your opinion" button -->
-                <a href="comment.php" class="share-opinion-button">Share your opinion</a>
+                    <?php // needs a check to see if a user is logged in or not
+                        echo "<button type = 'submit' class = 'share-opinion-button' name = 'share'>Share your opinion</button>";
+                        // need to have an if statement here to check if the cid = 0, and then to either
+                        //   redirect to comment.php or login.php
+
+                        if(isset($_POST['share'])){
+                            if($cid = 0){
+                                header('Location: ', login.php);
+                            }
+                            else{
+                                header('Location: ', comment.php);
+                            }
+                        }
+                    ?>
+                </form></div>
 
                 <!-- Display comments fetched from the database -->
                 <div class="comments">
