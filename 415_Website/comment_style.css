@@ -1,6 +1,9 @@
 /* comment_style.css */
 
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:@200;300;400;500;600;700&display=swap");
+
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #552B36; /* Main background color */
@@ -8,6 +11,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 
 /* Ensure header is centered */
 .header {
@@ -18,13 +22,16 @@ body {
   align-items: center; /* Align items vertically */
   justify-content: center; /* Align items horizontally */
 
+
 }
+
 
 .header img {
   height: 80px; /* Adjust the height of the logo as needed */
   display: inline-block; /* Display the logo next to the brand name */
   margin-right: 10px; /* Add margin to the right to create space between logo and text */
 }
+
 
 .header h1 {
   margin: 0;
@@ -34,12 +41,14 @@ body {
   vertical-align: middle; /* Align the brand name vertically with the logo */
 }
 
+
 /* Center the comment box and submit button */
 .rating-box textarea {
   max-width: 80%; /* Set the maximum width */
   height: 80%; /* Set the height to 80% of the rating box height */
   resize: none; /* Disable resizing */
 }
+
 
 /* Styles for the submit button */
 .rating-box button {
@@ -51,16 +60,18 @@ body {
   border: none; /* Remove button border */
   border-radius: 5px; /* Add button border radius */
   cursor: pointer;
-  
+ 
 }
+
 
 .rating-box button:hover {
   background-color: #AC5450; /* Darken button color on hover */
 }
 
+
 /* Set maximum width and height for the textarea*/
 .rating-box textarea {
-  
+ 
   margin: 20px auto; /*center the textarea horizontally*/
   width: 100%; /* Set the initial width to fill the available space */
   max-width: 700px; /* Set the maximum width */
@@ -69,6 +80,7 @@ body {
   min-height: 60px;
   resize: vertical; /* allow  vertical resizing*/
 }
+
 
 /* Styles for the rating box */
 .rating-box {
@@ -87,6 +99,7 @@ body {
  
 }
 
+
 .rating-box header {
   font-size: 22px;
   color: #552B36;
@@ -97,5 +110,24 @@ body {
 
 
 
+
+.rating-box .stars {
+  display: flex;
+  justify-content: center; /*center stars horizontally regarless of resizing if text area*/
+  /*align-items: center;*/
+  gap: 25px;
+}
+
+
+.stars i {
+  color: #e6e6e6; /*color of stars before selecting*/
+  font-size: 35px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stars i.active {
+  color: #C66864;
+}
 
 

@@ -1,103 +1,187 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #552B36; /* Main background color */
-    color: #FFCF9C; /* Text color */
-    margin: 0;
-    padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #552B36; /* Main background color */
+  color: #FFCF9C; /* Text color */
+  margin: 0;
+  padding: 0;
 }
+
 
 .header {
-    background-color: #C66864; /* Header bar color */
-    padding: 10px 0;
-    text-align: center;
-    display: flex; /* Use flexbox for easier alignment */
-    align-items: center; /* Align items vertically */
-    justify-content: center; /* Align items horizontally */
+  background-color: #C66864; /* Header bar color */
+  padding: 10px 0;
+  text-align: center;
+  display: flex; /* Use flexbox for easier alignment */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Align items horizontally */
 }
+
 
 .header img {
-    height: 80px; /* Adjust the height of the logo as needed */
-    display: inline-block; /*Display the logo next to the brand name*/
-    margin-right: 10px; /* Add margin to the right to create space between logo and text */
+  height: 80px; /* Adjust the height of the logo as needed */
+  display: inline-block; /*Display the logo next to the brand name*/
+  margin-right: 10px; /* Add margin to the right to create space between logo and text */
 }  
 
+
 .header h1 {
-    margin: 0;
-    font-size: 32px;
-    font-weight: bold;
-    display: inline-block; /* Display the brand name as an inline block */
-    vertical-align: middle; /* Align the brand name vertically with the logo */
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block; /* Display the brand name as an inline block */
+  vertical-align: middle; /* Align the brand name vertically with the logo */
 }
+
 
 .wrapper-main {
-    width: 300px;
-    margin: 180px auto; /* Center the form vertically */
-    background-color: #FFF; /* Background color for the form */
-    padding: 20px;
-    border-radius: 8px;
+  width: 300px;
+  margin: 180px auto; /* Center the form vertically */
+  background-color: #FFF; /* Background color for the form */
+  padding: 20px;
+  border-radius: 8px;
 }
+
 
 .linkStyle {
-    margin: 0px;
-    padding: 0px;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
-a:link, a:visited {
-    background-color: #C66864;
-    color: white;
-    padding: 15px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+.linkStyle a {
+  flex: 1; /* Distribute equal space among the links */
+  background-color: #C66864;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
+
+.linkStyle a:hover {
+  background-color: #AC5450; /* Darker reddish color on hover */
+}
+
+
+
+a:link, a:visited {
+  background-color: #C66864;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
 
 
 form {
-    text-align: center;
+  text-align: center;
 }
 
+
 label {
-    display: block;
-    margin-bottom: 8px;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 20px; /*Increase font size*/
 }
+
 
 input[type="text"],
 input[type="password"],
 button{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 25px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 25px;
+  box-sizing: border-box;
 }
+
 
 button {
-    background-color: #C66864; /* Reddish button color */
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  background-color: #C66864; /* Reddish button color */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
+
 
 button:hover {
-    background-color: #AC5450; /* Darker reddish color on hover */
+  background-color: #AC5450; /* Darker reddish color on hover */
 }
+
 
 .create-account-link {
-    color: #C66864; /* Text color */
-    text-decoration: underline; /* Underline the text to indicate it's clickable */
-    cursor: pointer; /* Change cursor to pointer on hover */
+  color: #C66864; /* Text color */
+  text-decoration: underline; /* Underline the text to indicate it's clickable */
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
+
 
 .create-account-link:hover {
-    color: #AC5450; /* Darken text color on hover */
-    text-decoration: none; /* Remove underline on hover */
+  color: #AC5450; /* Darken text color on hover */
+  text-decoration: none; /* Remove underline on hover */
 }
 
+
 .paragraphStyle{
-    background-color: #C66864;
-    color: antiquewhite;
-    text-align: center;
-    width: 70%;
-    border-radius: 25px;
+  background-color: #C66864;
+  color: antiquewhite;
+  text-align: center;
+  width: 70%;
+  border-radius: 25px;
+}
+
+.rating-section {
+  margin-top: 20px; /* Adjust spacing */
+  text-align: center;
+}
+
+.rating-section p {
+  color: #C66864; /* Color for the rating text */
+  font-weight: bold; /* Make the rating text bold */
+}
+
+
+.container {
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.container label {
+  font-size: 30px; /* Increase font size of the label */
+}
+
+
+.container select {
+  width: 80%; /* Set a fixed width for the dropdown menu */
+  padding: 10px; /* Increase padding */
+  font-size: 18px; /* Increase font size */
+}
+
+.container input[type="submit"] {
+  background: #fff;
+  padding: 10px 15px;
+  color: #C66864;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+  margin-top: 25px;
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.container input[type="submit"]:hover {
+  background: #C66864;
+  color: #fff;
 }

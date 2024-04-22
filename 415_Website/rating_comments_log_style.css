@@ -118,3 +118,14 @@ a:link, a:visited {
   text-decoration: none;
   display: inline-block;
 }
+
+.average-rating {
+  text-align: right; /* Align the average rating to the right */
+}
+
+.share-opinion-container {
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+  align-items: center; /* Align items vertically */
+  margin-bottom: 20px; /* Add margin below the container */
+}
