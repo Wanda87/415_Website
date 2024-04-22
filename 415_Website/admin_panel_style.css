@@ -1,0 +1,169 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #552B36; /* Main background color */
+  color: #FFCF9C; /* Text color */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+
+.header img {
+  height: 80px; /* Adjust the height of the logo as needed */
+  display: inline-block; /*Display the logo next to the brand name*/
+  margin-right: 10px; /* Add margin to the right to create space between logo and text */
+}  
+
+
+
+.container{
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; 
+}
+
+.container h2{
+
+  color:#fff;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.button{
+  background: #fff;
+  padding: 10px 15px;
+  color:#C66864;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+  margin-top: 25px;
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.button:hover{
+  background:#C66864;
+  color: #fff;
+}
+
+.popup{
+  background: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+
+.popup-content{
+  height: 250px;
+  width: 500px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.popup-content table { /*make table take up the entire popup window*/
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.popup-content th, .popup-content td {/*place content in the center*/
+  padding: 10px;
+  text-align: center;
+  color: #C66864; /* Pinkish text color */
+}
+
+.popup-content th { /*add a different color to the header*/ 
+  background-color: #C66864; /* Pinkish background color */
+  color: #fff; /* Text color */
+}
+
+.popup-content tbody tr:hover {
+  background-color: #f2f2f2; ; /* Hover color */
+}
+
+.popup.requests-popup .popup-content {
+  width: auto; /* Allow the width to adjust based on content */
+  max-width: 90%; /* Set a maximum width */
+}
+
+
+.container{
+  width: 90%; /*adjust to screen size*/
+}
+
+.close{
+  position:absolute;
+  top: 5px;
+  right: 5px;
+  background: #fff;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+  cursor: pointer;
+}
+
+/* Style for accept and deny buttons */
+.accept-btn, .deny-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Style for accept button */
+.accept-btn {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  margin-right: 10px; /* Add right margin for spacing */
+}
+
+/* Hover style for accept button */
+.accept-btn:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+/* Style for deny button */
+.deny-btn {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+/* Hover style for deny button */
+.deny-btn:hover {
+  background-color: #da190b; /* Darker red */
+}
+
+/* Style for delete button */
+.delete-btn {
+  background-color: #C66864; /* Pink */
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover style for delete button */
+.delete-btn:hover {
+  background-color: #b5565e; /* Darker pink */
+}
+

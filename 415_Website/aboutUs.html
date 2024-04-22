@@ -22,19 +22,39 @@
       <a href = "viewRestaurant.php">View Restaurants</a>
     </div>
 
-    <div>
-      <p>Our website hosts various high class resturants and their menus! Here, you can view menus,
-          what ingredients and allergens dishes have, and what other fine diners think of them.
+    <div style = "margin: 20px;">
+      <p>
+        Michelin-star restaurants are pricey! Imagine wasting all that money on something you didn't
+        even like, something you weren't expecting, or something that you're allergic to! At Michelin Eats
+        we want to offer you a way to check out these high class restaurants' menus, which include images
+        and possible allergens! We even have a ratings system where you can read the opinions of other fine
+        diners. Wow!
       </p>
 
-      <p>
+      <br>
+
+      <div>
+        <img src = "steak.jpg" style = "height: 200px; width: 200px; display: inline-block;">
+        <h4>See menu items!</h4>
+
+        <img src = "revScreenshot.png" style = "height: 200px; width: 400px; display: inline-block;">
+        <h4>And check out what others think about them!</h4>
+      </div>
+
+
+    </div>
+
+    <div style = "text-align: center;">
+      <p style = "margin: 20px;">
         Are you a restaurant manager and would you like to add your restaurant to our website?
         Please click below to fill out a form for submission!
       </p>
-    </div>
-
-    <div style = "width: 50%;">
-      <button>Fill out a form!</button>
+      <!-- I have no idea how I'm gonna implement this, but there'll need to be some php here
+            for checking if a user is logged in as a restaurant manager before directing them
+            to applicationForm.php -->
+      <form action = "applicationForm.php">
+        <button type = "submit" style = "width: 35%;">Fill out a form!</button>
+      </form>
     </div>
 
   </body>

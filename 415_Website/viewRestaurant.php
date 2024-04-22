@@ -1,60 +1,100 @@
-<!DOCTYPE html>
 <?php
-  $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
-  $username = 'admin';
-  $password = 'password';
-  $dbname = 'softwareproject';
+session_start();
 
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
-  if ($conn -> connect_error){
-    die("Connection Failed:" .mysqli_connect_error());
-  }
+$servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+$username = 'admin';
+$password = 'password';
+$dbname = 'softwareproject';
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection Failed:" . mysqli_connect_error());
+}
+
+// Initialize average rating to N/A if no restaurant is selected
+$average_rating = 'N/A';
+
+// Calculate average rating only if a restaurant is selected
+if (isset($_POST['restaurants'])) {
+    $restChoice = $_POST['restaurants'];
+
+    // Calculate average rating logic here...
+
+    // Sample ratings (replace this with actual rating calculation logic)
+    $sample_ratings = [4, 3, 5, 2, 4]; // Sample ratings array
+    $average_rating = array_sum($sample_ratings) / count($sample_ratings); // Calculate average rating
+}
+
+// Set the average rating as a session variable
+$_SESSION['average_rating'] = $average_rating;
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>View Restaurants</title>
-    <link rel="stylesheet" href = "style.css">
-  </head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="header">
+    <img src="michelinEatsLogo.png" alt="Logo">
+    <h1>Michelin Eats</h1>
+</div>
 
-  <body>
-    <div class="header">
-      <img src="michelinEatsLogo.png" alt="Logo"> 
-      <h1>Michelin Eats</h1>
-    </div>
+<!--Links-->
+<div>
+    <a href="login.php">Login</a>
+    <a href="create_account.php">Create an Account</a>
+    <a href="aboutUs.html">About Us</a>
+    <a href="viewRestaurant.php">View Restaurants</a>
+</div>
 
-    <!--Links-->
-    <div>
-        <a href = "login.php">Login</a>
-        <a href = "create_account.php">Create an Account</a>
-        <a href = "aboutUs.html">About Us</a>
-        <a href = "viewRestaurant.php">View Restaurants</a>
-    </div>
+<br>
 
-    <br>
+<script>
+  // Function to validate the form before submission
+  function validateForm() {
+    var restaurantSelect = document.getElementById('restaurant-select');
 
-    <form action = "rating_comments_log.php" method = "post"> <!-- Page will be directed to result -->
-      <label for = "restaurants">Select a Restaurant: </label>
+    // Check if the selected value is the default "Select" option
+    if (restaurantSelect.value === "") {
+      alert("Please select a restaurant.");
+      return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+  }
+</script>
 
-      <?php
-        $sql = "SELECT R.rid, R.rname FROM Restaurants R";
-        $result = $conn -> query($sql);
+<div class="container">
+<form action="rating_comments_log.php" method="post">
+    <!-- Page will be directed to result -->
+    <label for="restaurants">Select a Restaurant: </label>
+    <?php
+    $sql = "SELECT R.rid, R.rname FROM Restaurants R";
+    $result = $conn->query($sql);
 
-        // creating dropdown menu for resturants
-        if(mysqli_num_rows($result) != 0){
-          echo "<select name = 'restaurants'>";
-
-          while ($row = $result->fetch_assoc()){
-            echo "<option value = '" . $row["rid"] . "'>". $row["rname"] ."</option>";
-          }
-          
-          echo "</select> <input type='submit' name='submit' value='Enter'/>";
+    // creating dropdown menu for restaurants
+    if (mysqli_num_rows($result) != 0) {
+        echo "<select name='restaurants'>";
+        echo "<option value=''>- Select -</option>"; // Add none or -select- option
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='" . $row["rid"] . "'>" . $row["rname"] . "</option>";
         }
-      ?>
-    </form>
+        echo "</select> <input type='submit' name='submit' value='SEARCH'/>";
+    }
+    ?>
+</form>
 
-  </body>
+</div>
+
+<!-- Display average rating only if a restaurant is selected -->
+<?php if (isset($_POST['restaurants']) && $average_rating !== 'N/A'): ?>
+    <div>
+        <p>Average Rating: <?php echo $average_rating; ?></p>
+    </div>
+<?php endif; ?>
+
+</body>
 </html>
