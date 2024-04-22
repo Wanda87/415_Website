@@ -47,7 +47,7 @@
                 $headImage = $_POST['headImage'];
 
                 // had to put in backslashes for the table and column names (WOULD NOT work unless I did this)
-                $sql = "INSERT INTO `Restaurants` (`rname`, `rdesc`, `headImage`) VALUES ('$rname', '$rdesc', '$headImage')";
+                $sql = "INSERT INTO `PendingRestaurant` (`rname`, `rdesc`, `headImage`) VALUES ('$rname', '$rdesc', '$headImage')";
                 
 
                 // writing it here in case I forget come morning:
