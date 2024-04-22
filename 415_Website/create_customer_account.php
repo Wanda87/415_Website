@@ -3,7 +3,11 @@
 $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
+<<<<<<< HEAD
+$database = "softwareproject";
+=======
 $database = "dsoftwareproject";
+>>>>>>> 0ce4f2cf00d67c79d01e6cc799ecb8192b6b7f80
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -25,25 +29,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->bind_param("s", $user);
         $check->execute();
         $check->store_result();
-        
+
         if ($check->num_rows > 0) {
             $showNotification = true;
         } else {
-            $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
-
-            $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $name, $user, $hashedPass);
-            $result = $stmt->execute();
-
-            if ($result) {
-                echo "New record created successfully";
-                header("Location: login.php");
-                exit();
+            $check = $conn->prepare(" SELECT aname FROM Admins WHERE auser = ? ");
+        
+            $check->bind_param("s", $user);
+            $check->execute();
+            $check->store_result();
+        
+            if ($check->num_rows > 0) {
+                $showNotification = true;
             } else {
-                echo "Error: " . $stmt->error;
+                $check = $conn->prepare(" SELECT mname  FROM Managers  WHERE muser = ?  ");
+                $check->bind_param("s", $user);
+                $check->execute();
+                $check->store_result();
+        
+                if ($check->num_rows > 0) {
+                    $showNotification = true;
+                } else {
+                    $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
+        
+                    $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
+                    $stmt->bind_param("sss", $name, $user, $hashedPass);
+                    $result = $stmt->execute();
+        
+                    if ($result) {
+                        echo "New record created successfully";
+                        header("Location: login.php");
+                        exit();
+                    } else {
+                        echo "Error: " . $stmt->error;
+                    }
+                    $stmt->close();
+                }
             }
-            $stmt->close();
         }
+        
         $check->close();
     }
 }
