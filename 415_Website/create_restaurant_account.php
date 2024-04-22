@@ -1,9 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0ce4f2cf00d67c79d01e6cc799ecb8192b6b7f80
 $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
@@ -52,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
         
-                    $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
+                    $stmt = $conn->prepare("INSERT INTO Managers (mname, muser, mpass) VALUES (?, ?, ?)");
                     $stmt->bind_param("sss", $name, $user, $hashedPass);
                     $result = $stmt->execute();
         

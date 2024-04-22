@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
         
-                    $stmt = $conn->prepare("INSERT INTO Customers (cname, cuser, cpass) VALUES (?, ?, ?)");
-                    $stmt->bind_param("sss", $name, $user, $hashedPass);
+                    $stmt = $conn->prepare("INSERT INTO Admins (auser, apass) VALUES (?, ?)");
+                    $stmt->bind_param("ss", $user, $hashedPass);
                     $result = $stmt->execute();
         
                     if ($result) {
