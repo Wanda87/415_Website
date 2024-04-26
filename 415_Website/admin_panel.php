@@ -1,15 +1,21 @@
 <?php
-session_start();
+  session_start();
 
-$servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
-$username = 'admin';
-$password = 'password';
-$dbname = 'softwareproject';
+  $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+  $username = 'admin';
+  $password = 'password';
+  $dbname = 'softwareproject';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection Failed:" . mysqli_connect_error());
-}
+  $conn = mysqli_connect($servername, $username, $password, $dbname);
+  if ($conn->connect_error) {
+      die("Connection Failed:" . mysqli_connect_error());
+  }
+
+  if (isset($_GET['cid'])){
+    echo $_GET['cid'];
+    
+    //$deleteRow = mysqli_query($conn, "DELETE FROM `Customers` WHERE `cid` = $cid");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -49,24 +55,26 @@ if ($conn->connect_error) {
   <script>
     document.getElementById("usersBtn").addEventListener("click", function(){
       // Generate table content
-      var usersTable = "<table><thead><tr><th>User Name</th><th>Name</th></tr></thead><tbody>";
+      var usersTable = "<table><thead><tr> <th>CID</th> <th>User Name</th> <th>Name</th> </tr></thead><tbody>";
       
       <?php
-    $sql = "SELECT C.cuser, C.cname FROM Customers C";
-    $result = $conn->query($sql);
-    if (mysqli_num_rows($result) != 0) {
-        echo "var usersData = [";
-        while ($row = $result->fetch_assoc()) {
-            echo "{ username: '". $row["cuser"] . "', name: '" . $row["cname"] . "'},";
+        $sql = "SELECT C.cid, C.cuser, C.cname FROM Customers C";
+        $result = $conn->query($sql);
+        if (mysqli_num_rows($result) != 0) {
+            echo "var usersData = [";
+            while ($row = $result->fetch_assoc()) {
+                echo "{ username: '". $row["cuser"] . "', name: '" . $row["cname"] . "', cid: '" . $row["cid"] . "'},";
+            }
+            echo "];";
         }
-        echo "];";
-    }
-    ?>
+      ?>
 
       // Loop through data and generate table rows
       usersData.forEach(function(user) {
-  usersTable += "<tr><td>" + user.userName + "</td><td>" + user.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
-});
+        // NOTE: When retrieving data from js array, make sure the colum name from array matches below:
+        usersTable += "<tr><td>" + user.cid + "</td><td>"  + user.username + "</td><td>" + user.name + "</td><td><a class='delete-btn' href = 'admin_panel.php?cid= '>Delete</a></td></tr>";
+      });
+      
       usersTable += "</tbody></table>";
       // Update usersContent with generated table
       document.getElementById("usersContent").innerHTML = usersTable;
@@ -83,7 +91,7 @@ if ($conn->connect_error) {
   var managersTable = "<table><thead><tr><th>Manager ID</th><th>Name</th></tr></thead><tbody>";
   
   <?php
-    $sql = "SELECT M.muser, M.mname FROM Managers M";
+    $sql = "SELECT M.mname, M.muser FROM Managers M";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result) != 0) {
         echo "var managersData = [";
@@ -96,7 +104,7 @@ if ($conn->connect_error) {
 
   // Loop through data and generate table rows
 managersData.forEach(function(manager) {
-  managersTable += "<tr><td>" + manager.userName + "</td><td>" + manager.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
+  managersTable += "<tr><td>" + manager.username + "</td><td>" + manager.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
 });
   managersTable += "</tbody></table>";
   // Update managersContent with generated table
@@ -119,7 +127,7 @@ managersData.forEach(function(manager) {
     if (mysqli_num_rows($result) != 0) {
         echo "var requestsData = [";
         while ($row = $result->fetch_assoc()) {
-            echo "{ 'Restaurant Name': '". $row["rname"] . "', 'Manager Name': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'Health Inspection Documents': '" . $row["docCheck"] ."'},"; 
+            echo "{ 'restaurantName': '". $row["rname"] . "', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] ."'},"; 
         }
         echo "];";
     }
