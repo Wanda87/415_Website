@@ -88,15 +88,15 @@
     document.getElementById("managersBtn").addEventListener("click", function(){
 
       // Generate table content for managers (similar to users)
-  var managersTable = "<table><thead><tr><th>Manager ID</th><th>Name</th></tr></thead><tbody>";
+  var managersTable = "<table><thead><tr> <th>MID</th> <th>Manager Username</th> <th>Name</th> </tr></thead><tbody>";
   
   <?php
-    $sql = "SELECT M.mname, M.muser FROM Managers M";
+    $sql = "SELECT mid, mname, muser FROM Managers";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result) != 0) {
         echo "var managersData = [";
         while ($row = $result->fetch_assoc()) {
-            echo "{username: '". $row["muser"] . "', name: '" . $row["mname"] . "'},";
+            echo "{username: '". $row["muser"] . "', name: '" . $row["mname"] . "', mid: '" . $row["mid"] . "'},";
         }
         echo "];";
     }
@@ -104,7 +104,7 @@
 
   // Loop through data and generate table rows
 managersData.forEach(function(manager) {
-  managersTable += "<tr><td>" + manager.username + "</td><td>" + manager.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
+  managersTable += "<tr><td>" + manager.mid + "</td><td>" + manager.username + "</td><td>" + manager.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
 });
   managersTable += "</tbody></table>";
   // Update managersContent with generated table
