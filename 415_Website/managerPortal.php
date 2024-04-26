@@ -34,13 +34,18 @@
             <a href = "aboutUs.html">About Us</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
             <a href = "applicationForm.php">Application Form</a>
+            <a href = "menuItem.php">Add Menu Item</a>
             <a href = "logout.php">Logout</a>
         </div>
 
         <div style = "margin: 20px;">
             <h3>Welcome to the Manager Portal!</h3>
 
-            <p>Here, you can submit and review restaurant application forms!</p>
+            <p>
+                Here, you can submit and review restaurant application forms! Once approved, you can
+                then add new items to your restaurant's menu. If you haven't already, please submit
+                a form for your restaurant, and make sure to have your paperwork in order!
+            </p>
         </div>
     </body>
 </html>
