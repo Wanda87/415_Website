@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+$servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+$username = 'admin';
+$password = 'password';
+$dbname = 'softwareproject';
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection Failed:" . mysqli_connect_error());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,18 +42,27 @@
 
     <div class="popup-content" id="requestContent"></div>
     <img src="close.png" alt="Close" class="close">
+
+    <button class="save-btn" id="usersSubmit">Save</button>
   </div>
 
   <script>
     document.getElementById("usersBtn").addEventListener("click", function(){
       // Generate table content
       var usersTable = "<table><thead><tr><th>User Name</th><th>Name</th></tr></thead><tbody>";
-      // Hardcoded data (replace with data fetched from database)
-      var usersData = [
-        { username: "john_doe", name: "John Doe" },
-        { username: "jane_smith", name: "Jane Smith" },
-       
-      ];
+      
+      <?php
+    $sql = "SELECT C.cuser, C.cname FROM Customers C";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result) != 0) {
+        echo "var usersData = [";
+        while ($row = $result->fetch_assoc()) {
+            echo "{ username: '". $row["cuser"] . "', name: '" . $row["cname"] . "'},";
+        }
+        echo "];";
+    }
+    ?>
+
       // Loop through data and generate table rows
       usersData.forEach(function(user) {
   usersTable += "<tr><td>" + user.userName + "</td><td>" + user.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
@@ -58,12 +81,19 @@
 
       // Generate table content for managers (similar to users)
   var managersTable = "<table><thead><tr><th>Manager ID</th><th>Name</th></tr></thead><tbody>";
-  // Hardcoded data (replace with data fetched from database)
-  var managersData = [
-    { managerID: "1", name: "Manager 1" },
-    { managerID: "2", name: "Manager 2" },
-    // Add more data as needed
-  ];
+  
+  <?php
+    $sql = "SELECT M.muser, M.mname FROM Managers M";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result) != 0) {
+        echo "var managersData = [";
+        while ($row = $result->fetch_assoc()) {
+            echo "{username: '". $row["muser"] . "', name: '" . $row["mname"] . "'},";
+        }
+        echo "];";
+    }
+    ?>
+
   // Loop through data and generate table rows
 managersData.forEach(function(manager) {
   managersTable += "<tr><td>" + manager.userName + "</td><td>" + manager.name + "</td><td><button class='delete-btn'>Delete</button></td></tr>";
@@ -81,16 +111,23 @@ managersData.forEach(function(manager) {
     document.getElementById("requestsBtn").addEventListener("click", function(){
 
       // Generate table content for requests
-  var requestsTable = "<table><thead><tr><th>Restaurant Name</th><th>Manager Name</th><th>Description</th><th>Health Inspection Documents</th><th>Email Address</th><th>Action</th></tr></thead><tbody>";
-  // Hardcoded data (replace with data fetched from database)
-  var requestsData = [
-    { restaurantName: "Restaurant A", managerName: "Manager A", description: "Description A", documents: "Documents A", email: "email@example.com" },
-    { restaurantName: "Restaurant B", managerName: "Manager B", description: "Description B", documents: "Documents B", email: "email@example.com" },
-    // Add more data as needed
-  ];
+  var requestsTable = "<table><thead><tr><th>Restaurant Name</th><th>Manager Name</th><th>Description</th><th>Health Inspection Documents</th><th>Action</th></tr></thead><tbody>";
+  
+  <?php
+    $sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck FROM PendingRestaurant P";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result) != 0) {
+        echo "var requestsData = [";
+        while ($row = $result->fetch_assoc()) {
+            echo "{ 'Restaurant Name': '". $row["rname"] . "', 'Manager Name': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'Health Inspection Documents': '" . $row["docCheck"] ."'},"; 
+        }
+        echo "];";
+    }
+    ?>
+
   // Loop through data and generate table rows
   requestsData.forEach(function(request) {
-    requestsTable += "<tr><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + "</td><td>" + request.email + "</td><td><button class='accept-btn'>Accept</button><button class='deny-btn'>Deny</button></td></tr>";
+    requestsTable += "<tr><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + "</td><td><button class='accept-btn'>Accept</button><button class='deny-btn'>Deny</button></td></tr>";
   });
   requestsTable += "</tbody></table>";
   // Update requestsContent with generated table
@@ -117,7 +154,7 @@ managersData.forEach(function(manager) {
       console.log("Deny button clicked for request ID: ", this.closest("tr").dataset.requestId);
     });
   });
-
+  //Add event listener for close buttons
     document.querySelectorAll(".close").forEach(function(closeBtn) {
       closeBtn.addEventListener("click", function(){
         document.querySelector(".popup").style.display = "none";
