@@ -59,7 +59,7 @@
             <a href = "logout.php">Logout</a>
         </div>
 
-        <!-- There should be some php in here, first to check if the restaurant is approved before
+        <!-- TODO: There should be some php in here, first to check if the restaurant is approved before
                 showing the menu and item form -->
         <?php
             echo "<h2 style = 'text-indent: 5px; text-align: center;'>Current Menu:</h2>";
