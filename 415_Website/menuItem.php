@@ -1,3 +1,5 @@
+<!--TODO: grab rid from session variable rid -->
+
 <!DOCTYPE html>
 <?php
     $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -9,6 +11,7 @@
     if ($conn -> connect_error){
         die("Connection Failed:" .mysqli_connect_error());
     }
+    // sql = select rid from restaurants where mid = rid;
 
     $rid = 1; // THIS IS JUST FOR TESTING! We need to carry over the manager's mid to get the associated rid
 

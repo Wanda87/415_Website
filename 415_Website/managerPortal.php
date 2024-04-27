@@ -1,3 +1,6 @@
+<!-- TODO: *grab session variable mid from login.php
+           *also make sure to add a header for login.php to redirect to here -->
+
 <DOCTYPE html>
 <?php
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
