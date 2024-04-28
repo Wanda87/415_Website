@@ -2,7 +2,15 @@
            *also make sure to add a header for login.php to redirect to here -->
 
 <DOCTYPE html>
+
 <?php
+
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === "manager" && basename($_SERVER['PHP_SELF']) !== "managerPortal.php") {
+  header("location: managerPortal.php");
+  exit;
+} 
+
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
