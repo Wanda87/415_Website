@@ -1,5 +1,8 @@
 <DOCTYPE html>
 <?php
+session_start();
+$loggedin = "logged out";
+
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -31,6 +34,7 @@
 
         <!--Links-->
         <div>
+            <a href = "login.php">Login</a>
             <a href = "aboutUs.html">About Us</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
             <a href = "applicationForm.php">Application Form</a>
@@ -38,7 +42,7 @@
         </div>
 
         <div style = "margin: 20px; text-align: center;">
-            <h3>Logout (not) successful!</h3>
+            <h3>Logout successful!</h3>
 
         </div>
     </body>

@@ -4,9 +4,9 @@ $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
 $database = "softwareproject";
-$loggedin = "logged out";
 $conn = new mysqli($servername, $username, $password, $database);
-
+$loggedin = $_SESSION["loggedin"];
+print($loggedin);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -33,6 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           header("Location: viewRestaurant.php");
           exit;
         } 
+    }
+    else
+    {
+      
     }
 
     $check = $conn->prepare("SELECT auser, apass FROM Admins WHERE auser = ?");
@@ -98,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href = "style.css">
 </head>
 <body>
-
+  
   <div class="header">
     <img src="michelinEatsLogo.png" alt="Logo"> 
     <h1>Michelin Eats</h1>
@@ -110,9 +114,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href = "create_account.php">Create an Account</a>
         <a href = "aboutUs.html">About Us</a>
         <a href = "viewRestaurant.php">View Restaurants</a>
+        <?php if ($loggedin != "logged out"): ?>
+        <a href = "logout.php">Logout</a>
+        <?php endif; ?>
     </div>
 
   <section class="wrapper-main">
+ 
   <?php if (isset($showNotification) && $showNotification): ?>
         <a href="#" class="notification">
             <span>Username and password combination does not exist.</span>
