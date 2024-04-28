@@ -8,7 +8,11 @@ body {
   padding: 0;
 }
 
-
+/* Formatting for restaurant menu table */
+table, th, td { 
+  padding: 0 15px;
+  border: 1.5px solid black;
+}
 
 .header {
   background-color: #C66864; /* Header bar color */

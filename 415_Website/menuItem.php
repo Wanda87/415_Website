@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <?php
+    session_start();
     $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
     $username = 'admin';
     $password = 'password';
@@ -11,9 +12,13 @@
     if ($conn -> connect_error){
         die("Connection Failed:" .mysqli_connect_error());
     }
-    // sql = select rid from restaurants where mid = rid;
 
-    $rid = 1; // THIS IS JUST FOR TESTING! We need to carry over the manager's mid to get the associated rid
+    $mid = $_SESSION['mid'];
+    $get_rid = $conn->query("SELECT rid FROM Restaurants WHERE mid = $mid");
+    $result = $get_rid->fetch_assoc();
+    $rid = $result['rid'];
+
+    //$rid = 1; // THIS IS JUST FOR TESTING! We need to carry over the manager's mid to get the associated rid
 
     if(isset($_POST['submit']))
     {

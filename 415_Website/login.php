@@ -25,6 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->fetch();
         if (password_verify($pass, $cpass)) {
           $_SESSION['loggedin'] = "customer";
+
+          $grab_cid = $conn->query("SELECT cid FROM Customers WHERE cname = $user");
+          $result = $grab_cid->fetch_assoc();
+
+          $_SESSION['cid'] = $result["cid"];
+
           header("Location: viewRestaurant.php");
           exit;
         } 
@@ -39,6 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->fetch();
         if (password_verify($pass, $apass)) {
            $_SESSION['loggedin'] = "admin";
+
+           $grab_aid = $conn->query("SELECT aid FROM Admins WHERE aname = $user");
+           $result = $grab_aid->fetch_assoc();
+ 
+           $_SESSION['aid'] = $result["aid"];
+
            header("Location: admin_panel.php");
            exit;
         }
@@ -53,6 +65,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->fetch();
         if (password_verify($pass, $mpass)) {
           $_SESSION['loggedin'] = "manager";
+
+          $grab_mid = $conn->query("SELECT mid FROM Managers WHERE mname = $user");
+          $result = $grab_mid->fetch_assoc();
+
+          $_SESSION['mid'] = $result["mid"];
+
           header("Location: managerPortal.php");
           exit;
         }

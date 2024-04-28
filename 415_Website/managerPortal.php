@@ -3,6 +3,7 @@
 
 <DOCTYPE html>
 <?php
+    session_start();
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -49,6 +50,7 @@
                 then add new items to your restaurant's menu. If you haven't already, please submit
                 a form for your restaurant, and make sure to have your paperwork in order!
             </p>
+
         </div>
     </body>
 </html>

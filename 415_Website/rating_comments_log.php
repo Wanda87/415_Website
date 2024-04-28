@@ -80,14 +80,16 @@ if (isset($_POST['share'])) {
         }
 
         // table for displaying restaurant items
-        echo "<br>Available Menu Items:<br>";
+        echo "<br><br>Available Menu Items:<br><br>";
         $restSQL = "SELECT I.itemImage, I.itemname, I.iteamdesc FROM Items I WHERE I.rid = '$restChoice'";
         $restResult = $conn->query($restSQL);
 
         if (mysqli_num_rows($restResult) != 0) {
             echo "<table><tbody>";
             while ($row = $restResult->fetch_assoc()) {
-                echo "<tr><td style='padding: 0 15px;'>" . $row["itemname"] . "</td><td>" . $row["iteamdesc"] . "</td></tr>";
+                $image = $row["itemImage"];
+                //echo "<img src='data:image/jpeg;base64, " . base64_encode($image) . "'/>";
+                echo "<tr><td><img style = 'width: 150px; height: 150px;' src='data:image/jpeg;base64, " . base64_encode($image) . "'/>" . "</td><td>" . $row["itemname"] . "</td><td>" . $row["iteamdesc"] . "</td></tr>";
             }
             echo "</tbody></table>";
         } else {
