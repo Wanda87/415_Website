@@ -1,5 +1,6 @@
 <DOCTYPE html>
 <?php
+    session_start();
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -31,7 +32,7 @@
 
         <!--Links-->
         <div>
-            <a href = "aboutUs.html">About Us</a>
+            <a href = "aboutUs.php">About Us</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
             <a href = "applicationForm.php">Application Form</a>
             <a href = "logout.php">Logout</a>
@@ -47,6 +48,8 @@
                 $roname = $_POST['roname'];
                 $docCheck = $_POST['docCheck'];
 
+                $mid = $_SESSION['mid'];
+
                 // OKAY OKAY IT WORKS!!
                 if (count($_FILES) > 0)
                 { // handles the process of getting the image data into a long blob
@@ -54,9 +57,9 @@
                     {
                         $imgData = file_get_contents($_FILES['headImage']['tmp_name']);
                         $imgType = $_FILES['headImage']['type'];
-                        $sql = "INSERT INTO PendingRestaurant(rname, headImage, rdesc, roname, docCheck) VALUES(?, ?, ?, ?, ?)";
+                        $sql = "INSERT INTO PendingRestaurant(rname, headImage, rdesc, roname, docCheck, mid) VALUES(?, ?, ?, ?, ?, ?)";
                         $statement = $conn->prepare($sql);
-                        $statement->bind_param('sssss', $rname, $imgData, $rdesc, $roname, $docCheck);
+                        $statement->bind_param('ssssss', $rname, $imgData, $rdesc, $roname, $docCheck, $mid);
                     }
                 }
                 if($statement -> execute())

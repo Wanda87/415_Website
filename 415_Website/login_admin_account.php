@@ -18,7 +18,7 @@
   <div>
         <a href = "login.php">Login</a>
         <a href = "create_account.php">Create an Account</a>
-        <a href = "aboutUs.html">About Us</a>
+        <a href = "aboutUs.php">About Us</a>
         <a href = "viewRestaurant.php">View Restaurants</a>
     </div>
 

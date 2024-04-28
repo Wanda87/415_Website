@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+  session_start();
   $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
   $password = 'password';
@@ -28,7 +29,7 @@
 
         <!--Links-->
         <div>
-            <a href = "aboutUs.html">About Us</a>
+            <a href = "aboutUs.php">About Us</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
             <a href = "applicationForm.php">Application Form</a>
             <a href = "menuItem.php">Add Menu Item</a>

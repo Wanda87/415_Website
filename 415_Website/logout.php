@@ -31,7 +31,7 @@
 
         <!--Links-->
         <div>
-            <a href = "aboutUs.html">About Us</a>
+            <a href = "aboutUs.php">About Us</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
             <a href = "applicationForm.php">Application Form</a>
             <a href = "logout.php">Logout</a>
