@@ -5,24 +5,24 @@
 
 <?php
 session_start();
-if($_SESSION["loggedin"] === "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php") {
-    header("location: managerPortal.php");
-} else {
-    header("location: login.php");
+if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php"){
+  header("location: managerPortal.php");
+}else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "managerPortal.php"){
+  header("location: login.php");
 }
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
-    {
-        $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
-        $username = 'admin';
-        $password = 'password';
-        $dbname = 'softwareproject';
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
+{
+    $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
+    $username = 'admin';
+    $password = 'password';
+    $dbname = 'softwareproject';
 
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-        if ($conn -> connect_error){
-            die("Connection Failed:" .mysqli_connect_error());
-        }
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    if ($conn -> connect_error){
+        die("Connection Failed:" .mysqli_connect_error());
     }
+}
 ?>
 
 <html lang = "en">

@@ -1,15 +1,12 @@
 <?php
 
 
-
+session_start();
 if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "admin_panel.php"){
   header("location: admin_panel.php");
-  exit;
-}else
-{
+}else if ($_SESSION["loggedin"] != "admin" && basename($_SERVER['PHP_SELF']) == "admin_panel.php"){
   header("location: login.php");
- 
-} 
+}
 
   $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
