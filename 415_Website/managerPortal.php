@@ -5,6 +5,13 @@
 
 <?php
     session_start();
+
+    if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php"){
+        header("location: managerPortal.php");
+    }else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "managerPortal.php"){
+        header("location: login.php");
+
+        
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -12,10 +19,7 @@
         $password = 'password';
         $dbname = 'softwareproject';
         session_start();
-        if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php"){
-            header("location: managerPortal.php");
-        }else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "managerPortal.php"){
-            header("location: login.php");
+        
     }
     }
 ?>
