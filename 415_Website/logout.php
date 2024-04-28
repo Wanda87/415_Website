@@ -1,7 +1,7 @@
 <DOCTYPE html>
 <?php
 session_start();
-$loggedin = "logged out";
+
 
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
@@ -15,6 +15,8 @@ $loggedin = "logged out";
             die("Connection Failed:" .mysqli_connect_error());
         }
     }
+session_destroy();
+$loggedin = "logged out";
 ?>
 
 <html lang = "en">

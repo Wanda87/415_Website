@@ -5,11 +5,11 @@ $username = "admin";
 $password = "password";
 $database = "softwareproject";
 $conn = new mysqli($servername, $username, $password, $database);
-$loggedin = $_SESSION["loggedin"];
-print($loggedin);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+
 }
+$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
