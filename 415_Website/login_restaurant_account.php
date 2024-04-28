@@ -24,6 +24,7 @@
 
   <section class="wrapper-main">
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+  
     <label for="username">Username:</label>
     <input required type="text" id="username" name="username" placeholder="Enter your username">
 

@@ -1,10 +1,10 @@
 <?php
-
+session_start();
 $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
 $database = "softwareproject";
-$loggedin = false;
+$loggedin = "logged out";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -15,8 +15,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
     $pass =  $_POST['pwd'];
- 
-    // Check if the user is in Customers table
+  
     $check = $conn->prepare("SELECT cname, cpass FROM Customers WHERE cuser = ?");
     $check->bind_param("s", $user);
     $check->execute();
@@ -25,13 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->bind_result($cname, $cpass);
         $check->fetch();
         if (password_verify($pass, $cpass)) {
-          $_SESSION['loggedin'] = true;
-  
-          
+          $_SESSION['loggedin'] = "customer";
+          header("Location: viewRestaurant.php");
+          exit;
         } 
     }
-    
-    // Check if the user is in Admins table
+
     $check = $conn->prepare("SELECT auser, apass FROM Admins WHERE auser = ?");
     $check->bind_param("s", $user);
     $check->execute();
@@ -40,13 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->bind_result($aname, $apass);
         $check->fetch();
         if (password_verify($pass, $apass)) {
-           $_SESSION['loggedin'] = true;
-  
-            
+           $_SESSION['loggedin'] = "admin";
+           header("Location: admin_panel.php");
+           exit;
         }
     }
     
-    // Check if the user is in Managers table
     $check = $conn->prepare("SELECT mname, mpass FROM Managers WHERE mname= ?");
     $check->bind_param("s", $user);
     $check->execute();
@@ -55,15 +52,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->bind_result($mname, $mpass);
         $check->fetch();
         if (password_verify($pass, $mpass)) {
-          $_SESSION['loggedin'] = true;
-  
-           
+          $_SESSION['loggedin'] = "manager";
+          header("Location: managerPortal.php");
+          exit;
         }
     }
-    
+
+    // If none of the above conditions are met, user does not exist.
+    $showNotification = true;
+} else {
+  $showNotification = false; // Set $showNotification to false when not in POST request.
 }
 
 ?>
+
+
 
 
 
@@ -92,6 +95,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
   <section class="wrapper-main">
+  <?php if (isset($showNotification) && $showNotification): ?>
+        <a href="#" class="notification">
+            <span>Username and password combination does not exist.</span>
+            <span class="badge"></span>
+       
+        </a>
+        <br></br>
+    <?php endif; ?>
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="username">Username:</label>
     <input required type="text" id="username" name="username" placeholder="Enter your username">

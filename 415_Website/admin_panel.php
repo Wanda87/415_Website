@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "admin_panel.php"){
+  header("location: admin_panel.php");
+  exit;
+}    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
