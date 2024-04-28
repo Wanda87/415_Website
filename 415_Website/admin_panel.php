@@ -1,4 +1,12 @@
 <?php
+<<<<<<< HEAD
+session_start();
+
+if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "admin_panel.php"){
+  header("location: admin_panel.php");
+  exit;
+}    
+=======
   session_start();
 
   $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -16,6 +24,7 @@
     
     //$deleteRow = mysqli_query($conn, "DELETE FROM `Customers` WHERE `cid` = $cid");
   }
+>>>>>>> 1e70f7cbfc4ed39e9ee28d0d06f796a235af5566
 ?>
 
 <!DOCTYPE html>
