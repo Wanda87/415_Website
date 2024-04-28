@@ -1,7 +1,10 @@
+<!-- TODO: Get button to direct to 3 different pages: login.php if not logged in,
+                                                      create_restaurant_account.php if logged in as customer/admin,
+                                                      applicationForm.php if logged in as manager -->
 <?php
   session_start();
   $loginCheck = $_SESSION['loggedin'];
-  
+
 
   // Database connection
   $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
