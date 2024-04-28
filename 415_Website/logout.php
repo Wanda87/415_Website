@@ -1,5 +1,8 @@
 <DOCTYPE html>
 <?php
+session_start();
+
+
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
@@ -12,6 +15,8 @@
             die("Connection Failed:" .mysqli_connect_error());
         }
     }
+session_destroy();
+$loggedin = "logged out";
 ?>
 
 <html lang = "en">
@@ -32,13 +37,14 @@
         <!--Links-->
         <div>
             <a href = "aboutUs.php">About Us</a>
+            <a href = "login.php">Login</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
             <a href = "applicationForm.php">Application Form</a>
             <a href = "logout.php">Logout</a>
         </div>
 
         <div style = "margin: 20px; text-align: center;">
-            <h3>Logout (not) successful!</h3>
+            <h3>Logout successful!</h3>
 
         </div>
     </body>
