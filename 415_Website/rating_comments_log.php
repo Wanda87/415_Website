@@ -74,7 +74,7 @@ if (isset($_POST['share'])) {
             $row = $restResult->fetch_assoc();
             $image = $row["headImage"];
             echo "<div>Description: " . $row["rdesc"] . "</div>";
-            echo "<img src='data:image/jpeg;base64, " . base64_encode($image) . "'/>";
+            echo "<img style = 'width: 200px; height: 150px;' src='data:image/jpeg;base64, " . base64_encode($image) . "'/>";
         } else {
             echo "Error displaying restaurant.";
         }
