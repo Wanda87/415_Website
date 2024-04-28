@@ -31,36 +31,38 @@
 
         <!--Links-->
         <div>
-            <a href = "login.php">Login</a>
-            <a href = "create_account.php">Create an Account</a>
             <a href = "aboutUs.html">About Us</a>
             <a href = "viewRestaurant.php">View Restaurants</a>
+            <a href = "applicationForm.php">Application Form</a>
+            <a href = "logout.php">Logout</a>
         </div>
 
         <br>
 
-        <?php // so far works with adding the name and description of restaurant
-            if(isset($_POST['rname']) && isset($_POST['rdesc']) && isset($_POST['headImage']))
+        <?php
+            if(isset($_POST['submit']))
             {
                 $rname = $_POST['rname'];
                 $rdesc = $_POST['rdesc'];
-                $headImage = $_POST['headImage'];
+                $roname = $_POST['roname'];
+                $docCheck = $_POST['docCheck'];
 
-                // had to put in backslashes for the table and column names (WOULD NOT work unless I did this)
-                $sql = "INSERT INTO `PendingRestaurant` (`rname`, `rdesc`, `headImage`) VALUES ('$rname', '$rdesc', '$headImage')";
-                
-
-                // writing it here in case I forget come morning:
-                //   for adding pending restaurants should we add a new column to restaurants
-                //   (idk like status) and set it to true or false depending if it's approved?
-                //   sounds better than making an entirely new restaurant table in the db. we'd
-                //   probably have to add an extra condition to the sql statement in rating_comments_log.php
-
-                $query = mysqli_query($conn, $sql);
-                if($query)
-                    echo '<h2 style = "text-align: center;">Form Submission Successful(?)</h2>';
+                // OKAY OKAY IT WORKS!
+                if (count($_FILES) > 0)
+                { // handles the process of getting the image data into a long blob
+                    if (is_uploaded_file($_FILES['headImage']['tmp_name']))
+                    {
+                        $imgData = file_get_contents($_FILES['headImage']['tmp_name']);
+                        $imgType = $_FILES['headImage']['type'];
+                        $sql = "INSERT INTO PendingRestaurant(rname, headImage, rdesc, roname, docCheck) VALUES(?, ?, ?, ?, ?)";
+                        $statement = $conn->prepare($sql);
+                        $statement->bind_param('sssss', $rname, $imgData, $rdesc, $roname, $docCheck);
+                    }
+                }
+                if($statement -> execute())
+                    echo "<h2 style = 'text-align: center;'>Form Submission Successful!</h2>";
                 else
-                    echo '<h2 style = "text-align: center;">Whu-oh! There was a problem with submitting your form.</h2>';
+                    echo "<h2 style = 'text-align: center;'>Whu-oh! There was a problem with submitting your form.</h2>";
             }
         ?>
     </body>
