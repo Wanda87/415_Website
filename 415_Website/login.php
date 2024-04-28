@@ -5,7 +5,6 @@ $username = "admin";
 $password = "password";
 $database = "softwareproject";
 $loggedin = "logged out";
-
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
@@ -71,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
           $_SESSION['mid'] = $result["mid"];
 
+          print($loggedin);
           header("Location: managerPortal.php");
           exit;
         }

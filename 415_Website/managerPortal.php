@@ -1,7 +1,8 @@
 <!-- TODO: *grab session variable mid from login.php
-           *also make sure to add a header for login.php to redirect to here -->
+           *also make sure to add a header for login.php to redirect to here 
+            *&& basename($_SERVER['PHP_SELF']) != "managerPortal.php"-->
+            <DOCTYPE html>
 
-<DOCTYPE html>
 <?php
     session_start();
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
@@ -10,11 +11,12 @@
         $username = 'admin';
         $password = 'password';
         $dbname = 'softwareproject';
-
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-        if ($conn -> connect_error){
-            die("Connection Failed:" .mysqli_connect_error());
-        }
+        session_start();
+        if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php"){
+            header("location: managerPortal.php");
+        }else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "managerPortal.php"){
+            header("location: login.php");
+    }
     }
 ?>
 
