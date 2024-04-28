@@ -1,15 +1,15 @@
 <!-- TODO: *grab session variable mid from login.php
-           *also make sure to add a header for login.php to redirect to here -->
-
-<DOCTYPE html>
+           *also make sure to add a header for login.php to redirect to here 
+            *&& basename($_SERVER['PHP_SELF']) != "managerPortal.php"-->
+            <DOCTYPE html>
 
 <?php
-
-
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === "manager" && basename($_SERVER['PHP_SELF']) !== "managerPortal.php") {
-  header("location: managerPortal.php");
-  exit;
-} 
+session_start();
+if($_SESSION["loggedin"] === "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php") {
+    header("location: managerPortal.php");
+} else {
+    header("location: login.php");
+}
 
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
