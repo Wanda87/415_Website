@@ -47,7 +47,7 @@
                 $roname = $_POST['roname'];
                 $docCheck = $_POST['docCheck'];
 
-                // OKAY OKAY IT WORKS!
+                // OKAY OKAY IT WORKS!!
                 if (count($_FILES) > 0)
                 { // handles the process of getting the image data into a long blob
                     if (is_uploaded_file($_FILES['headImage']['tmp_name']))
