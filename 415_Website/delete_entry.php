@@ -1,14 +1,6 @@
 <?php
- session_start();
+session_start();
 
- $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
-
-   
- if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "delete_entry.php"){
-    header("location: delete_entry.php");
-  }else if ($_SESSION["loggedin"] != "admin" && basename($_SERVER['PHP_SELF']) == "delete_entry.php"){
-    header("location: login.php");
-  }
 $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
 $username = 'admin';
 $password = 'password';
@@ -46,8 +38,26 @@ if(isset($_GET['cid'])) {
         $_SESSION['delete_message'] = 'Error deleting manager: ' . $conn->error;
     }
     $stmt->close();
-} else {
-    // Neither cid nor mid provided
+} 
+
+  elseif(isset($_GET['prid'])) {
+  // Delete entry from managers table
+  $mid = $_GET['prid'];
+  
+  // Prepare statement
+  $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE prid = ?");
+  $stmt->bind_param("i", $prid); // "i" indicates integer type
+  if ($stmt->execute()) {
+      $_SESSION['delete_message'] = 'Request deleted successfully.';
+  } else {
+      $_SESSION['delete_message'] = 'Error deleting request: ' . $conn->error;
+  }
+  $stmt->close();
+} 
+
+
+  else {
+    // Neither cid nor mid nor prid provided
     $_SESSION['delete_message'] = 'Error: No ID provided for deletion.';
 }
 
@@ -55,3 +65,4 @@ if(isset($_GET['cid'])) {
 header("Location: admin_panel.php");
 exit; // Ensure script execution stops after redirection
 ?>
+
