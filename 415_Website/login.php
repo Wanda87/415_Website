@@ -17,11 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if ($loggedin !== "logged out") {
     $logoutNotif = True;
-   
   }else{
-  
-  
-
     $user = $_POST['username'];
     $pass =  $_POST['pwd'];
   
@@ -44,11 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           exit;
         } 
     }
-    else
-    {
-      
-    }
-
     $check = $conn->prepare("SELECT auser, apass FROM Admins WHERE auser = ?");
     $check->bind_param("s", $user);
     $check->execute();
@@ -90,11 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // If none of the above conditions are met, user does not exist.
     $showNotification = true;
   }
 } else {
-  $showNotification = false; // Set $showNotification to false when not in POST request.
+  $showNotification = false; 
 }
 
 
