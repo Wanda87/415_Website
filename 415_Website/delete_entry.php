@@ -42,8 +42,8 @@ if(isset($_GET['cid'])) {
 
   elseif(isset($_GET['prid'])) {
   // Delete entry from managers table
-  $mid = $_GET['prid'];
-  
+  $prid = $_GET['prid'];
+
   // Prepare statement
   $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE prid = ?");
   $stmt->bind_param("i", $prid); // "i" indicates integer type
