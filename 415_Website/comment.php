@@ -1,3 +1,19 @@
+
+<?php
+
+  session_start();
+
+  $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+    
+  if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "comment.php") {
+      header("location: comment.php");
+  } else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "comment.php") {
+      header("location: login.php");
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

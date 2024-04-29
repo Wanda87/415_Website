@@ -1,6 +1,15 @@
 <DOCTYPE html>
 <?php
     session_start();
+
+    $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+    
+    if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "processForm.php") {
+        header("location: processForm.php");
+    } else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "processForm.php") {
+        header("location: login.php");
+    }
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
     {
         $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';

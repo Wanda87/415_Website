@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <?php
+
   session_start();
+
+  $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+  if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "applicationForm.php"){
+    header("location: applicationForm.ph");
+  }else if ($_SESSION["loggedin"] != "admin" && basename($_SERVER['PHP_SELF']) == "applicationForm.ph"){
+    header("location: login.php");
+  }
+  
+
   $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
   $password = 'password';
