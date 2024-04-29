@@ -1,7 +1,14 @@
 <?php
 session_start();
-$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
 
+
+$loggedin = isset($_SESSION["loggedin"]) ? $_SESSION["loggedin"] : "logged out";
+
+if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "viewRestaurant.php") {
+    header("location: viewRestaurant.php");
+} else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "viewRestaurant.php") {
+    header("location: login.php");
+}
 
 $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
 $username = 'admin';
