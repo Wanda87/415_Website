@@ -3,7 +3,9 @@
                                                       applicationForm.php if logged in as manager -->
 <?php
   session_start();
-  $loginCheck = $_SESSION['loggedin'];
+  #$loginCheck = $_SESSION['loggedin'];
+  $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
 
 
   // Database connection
@@ -40,6 +42,9 @@
       <a href = "create_account.php">Create an Account</a>
       <a href = "aboutUs.html">About Us</a>
       <a href = "viewRestaurant.php">View Restaurants</a>
+      <?php if ($loggedin != "logged out"): ?>
+        <a href = "logout.php">Logout</a>
+        <?php endif; ?>
     </div>
 
     <div style = "margin: 20px;">

@@ -36,11 +36,11 @@ $loggedin = "logged out";
 
         <!--Links-->
         <div>
-            <a href = "aboutUs.php">About Us</a>
-            <a href = "login.php">Login</a>
-            <a href = "viewRestaurant.php">View Restaurants</a>
-            <a href = "applicationForm.php">Application Form</a>
-            <a href = "logout.php">Logout</a>
+           
+        <a href = "login.php">Login</a>
+        <a href = "create_account.php">Create an Account</a>
+        <a href = "aboutUs.php">About Us</a>
+        <a href = "viewRestaurant.php">View Restaurants</a>
         </div>
 
         <div style = "margin: 20px; text-align: center;">

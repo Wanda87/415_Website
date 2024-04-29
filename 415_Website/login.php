@@ -4,6 +4,7 @@ $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
 $database = "softwareproject";
+$logoutNotif = False;
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -11,7 +12,16 @@ if ($conn->connect_error) {
 }
 $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  if ($loggedin !== "logged out") {
+    $logoutNotif = True;
+   
+  }else{
+  
+  
+
     $user = $_POST['username'];
     $pass =  $_POST['pwd'];
   
@@ -82,9 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If none of the above conditions are met, user does not exist.
     $showNotification = true;
+  }
 } else {
   $showNotification = false; // Set $showNotification to false when not in POST request.
 }
+
 
 ?>
 
@@ -129,6 +141,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </a>
         <br></br>
     <?php endif; ?>
+
+    <?php if (isset($logoutNotif ) && $logoutNotif ): ?>
+      <a href="#" class="notification">
+        <span>You are already logged in. Please log out to acess a diffrent account</span>
+        <span class="badge"></span>
+      </a>
+      <br></br>
+    <?php endif; ?>
+
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="username">Username:</label>
     <input required type="text" id="username" name="username" placeholder="Enter your username">

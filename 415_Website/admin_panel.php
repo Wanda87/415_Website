@@ -45,6 +45,7 @@ if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "admin_
     <a href="#" class="button" id="usersBtn">Users</a>
     <a href="#" class="button" id="managersBtn">Restaurant Managers</a>
     <a href="#" class="button" id="requestsBtn">Requests</a>
+    <a href="logout.php" class="button" id="logoutBtn">Log out</a>
   </div>
 
   <div class="popup">

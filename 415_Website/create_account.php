@@ -1,3 +1,8 @@
+<?php
+session_start();
+$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +25,9 @@
         <a href = "create_account.php">Create an Account</a>
         <a href = "aboutUs.php">About Us</a>
         <a href = "viewRestaurant.php">View Restaurants</a>
+        <?php if ($loggedin != "logged out"): ?>
+        <a href = "logout.php">Logout</a>
+        <?php endif; ?>
     </div>
 
     <section class = "wrapper-main">

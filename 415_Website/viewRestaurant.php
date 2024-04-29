@@ -1,5 +1,7 @@
 <?php
 session_start();
+$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
 
 $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
 $username = 'admin';
@@ -49,6 +51,12 @@ $_SESSION['average_rating'] = $average_rating;
     <a href="create_account.php">Create an Account</a>
     <a href="aboutUs.php">About Us</a>
     <a href="viewRestaurant.php">View Restaurants</a>
+    <?php if ($loggedin == "manager"): ?>
+        <a href = "managerPortal.php">Back to Manager Portal</a>
+    <?php endif; ?>
+    <?php if ($loggedin != "logged out"): ?>
+        <a href = "logout.php">Logout</a>
+    <?php endif; ?>
 </div>
 
 <br>
