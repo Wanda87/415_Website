@@ -42,7 +42,7 @@ if(isset($_GET['cid'])) {
 
   elseif(isset($_GET['prid'])) {
   // Delete entry from managers table
-  $mid = $_GET['prid'];
+  $prid = $_GET['prid'];
   
   // Prepare statement
   $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE prid = ?");
@@ -65,4 +65,5 @@ if(isset($_GET['cid'])) {
 header("Location: admin_panel.php");
 exit; // Ensure script execution stops after redirection
 ?>
+
 
