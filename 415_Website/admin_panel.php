@@ -10,6 +10,11 @@
   if ($conn->connect_error) {
       die("Connection Failed:" . mysqli_connect_error());
   }
+  if($loggedin == "admin" && basename($_SERVER['PHP_SELF']) != "admin_panel.php") {
+    header("location: admin_panel.php");
+} else if ($loggedin != "admin" && basename($_SERVER['PHP_SELF']) == "admin_panel.php") {
+    header("location: login.php");
+}
 
 ?>
 

@@ -1,5 +1,12 @@
 <?php
 session_start();
+$loggedin = isset($_SESSION["loggedin"]) ? $_SESSION["loggedin"] : "logged out";
+
+if($loggedin == "admin" && basename($_SERVER['PHP_SELF']) != "accept_request.php") {
+    header("location: accept_request.php");
+} else if ($loggedin == "admin" && basename($_SERVER['PHP_SELF']) == "accept_request.php") {
+    header("location: login.php");
+}
 
 // Check if parameters are provided
 if(isset($_GET['rname']) && isset($_GET['rdesc'])) {

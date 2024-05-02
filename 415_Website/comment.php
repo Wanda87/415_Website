@@ -8,7 +8,7 @@
     
   if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "comment.php") {
       header("location: comment.php");
-  } else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "comment.php") {
+  } else if ($loggedin -= "logged out" && basename($_SERVER['PHP_SELF']) == "comment.php") {
       header("location: login.php");
   }
 ?>

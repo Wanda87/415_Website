@@ -4,7 +4,13 @@
   $username = 'admin';
   $password = 'password';
   $dbname = 'databaseproj';
+  $loggedin = isset($_SESSION["loggedin"]) ? $_SESSION["loggedin"] : "logged out";
 
+  if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "viewRestaurantResult.php") {
+      header("location: viewRestaurantResult.php");
+  } else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "viewRestaurantResult.php") {
+      header("location: login.php");
+  }
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   if ($conn -> connect_error){
     die("Connection Failed:" .mysqli_connect_error());
