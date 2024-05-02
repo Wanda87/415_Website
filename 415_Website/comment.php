@@ -47,7 +47,7 @@
   </form>
 
   <?php
-    require 'C:\Users\Showb\Desktop\New folder\vendor\autoload.php';
+    require '\vendor\autoload.php';
     use Aws\Comprehend\ComprehendClient;
     
     $cacertPath = 'cacert.pem'; // Update this with the actual path
