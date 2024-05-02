@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $cpass)) {
           $_SESSION['loggedin'] = "customer";
 
-          $grab_cid = $conn->query("SELECT cid FROM Customers WHERE cname = $user");
+          $grab_cid = $conn->query("SELECT cid FROM Customers WHERE cuser = '$user'");
           $result = $grab_cid->fetch_assoc();
 
           $_SESSION['cid'] = $result["cid"];
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $apass)) {
            $_SESSION['loggedin'] = "admin";
 
-           $grab_aid = $conn->query("SELECT aid FROM Admins WHERE aname = $user");
+           $grab_aid = $conn->query("SELECT aid FROM Admins WHERE auser = '$user'");
            $result = $grab_aid->fetch_assoc();
  
            $_SESSION['aid'] = $result["aid"];
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $mpass)) {
           $_SESSION['loggedin'] = "manager";
 
-          $grab_mid = $conn->query("SELECT mid FROM Managers WHERE mname = $user");
+          $grab_mid = $conn->query("SELECT mid FROM Managers WHERE muser = '$user'");
           $result = $grab_mid->fetch_assoc();
 
           $_SESSION['mid'] = $result["mid"];
