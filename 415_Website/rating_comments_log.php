@@ -20,7 +20,7 @@ $average_rating = array_sum($sample_ratings) / count($sample_ratings); // Calcul
 $_SESSION['average_rating'] = $average_rating;
 
 // Correct header location redirects
-$cid = 0;
+$cid = isset($_SESSION['cid']) ? $_SESSION['cid'] : 0;
 if (isset($_POST['share'])) {
     if ($cid == 0) {
         header('Location: login.php');
