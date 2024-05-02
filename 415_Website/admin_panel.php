@@ -49,6 +49,7 @@
     <a href="#" class="button" id="usersBtn">Users</a>
     <a href="#" class="button" id="managersBtn">Restaurant Managers</a>
     <a href="#" class="button" id="requestsBtn">Requests</a>
+    <a href="logout.php" class="button" id="requestsBtn">Log out</a>
   </div>
 
   <div class="popup">
