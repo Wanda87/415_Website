@@ -144,7 +144,7 @@ managersData.forEach(function(manager) {
 
   // Loop through data and generate table rows
   requestsData.forEach(function(request, index) {
-    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + "</td><td><button class='accept-btn'>Accept</button><button class='deny-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</button></td></tr>";
+    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + "</td><td><button class='accept-btn' data-prid='" + index + "'>Accept</button><button class='deny-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</button></td></tr>";
 
   });
   requestsTable += "</tbody></table>";
@@ -212,10 +212,10 @@ document.querySelectorAll(".accept-btn").forEach(function(btn) {
         var row = this.closest("tr"); // Get the closest row
         var restaurantName = row.querySelector("td:first-child").innerText; // Get the restaurant name
         var description = row.querySelector("td:nth-child(3)").innerText; // Get the description
-
+        var prid = row.dataset.prid; // Get the request ID
 
         // Redirect to accept_request.php with parameters to handle insertion into Restaurants table
-        window.location.href = "accept_request.php?rname=" + encodeURIComponent(restaurantName) + "&rdesc=" + encodeURIComponent(description);
+        window.location.href = "accept_request.php?rname=" + encodeURIComponent(restaurantName) + "&rdesc=" + encodeURIComponent(description) + "&prid=" + prid;
     });
 });
 
