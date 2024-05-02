@@ -30,18 +30,24 @@
     <h1>Michelin Eats</h1>
   </div>
 
-  <div class="rating-box">
-    <header>How was your experience?</header>
-    <div class="stars">
-    <input type="hidden" id="rating" name="rating"> <!-- Hidden input field for capturing the rating value -->
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
+  <form method = "POST">
+    <div class="rating-box">
+      <header>How was your experience?</header>
+      <div class="stars">
+      <input type="hidden" id="rating" name="rating"> <!-- Hidden input field for capturing the rating value -->
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <textarea id="comment-box" name = "comment-box" placeholder="Add your comment here..." rows="4"></textarea>
+      <button id="submit-comment" name = "submit-comment">Submit</button>
     </div>
-    <textarea id="comment-box" placeholder="Add your comment here..." rows="4"></textarea>
-    <button id="submit-comment">Submit</button>
-  </div>
+  </form>
+
+  <?php
+    // put sentiment analysis over here
+  ?>
 </body>
 </html>
