@@ -67,7 +67,8 @@ if (isset($_POST['share'])) {
     <div class="restaurant-list">
         <?php // displaying restaurant item table:
         // grabbing the name based off of $restChoice
-        $restChoice = $_SESSION['restaurant_choice'];
+        $restChoice = $_POST['restaurants'];
+        $_SESSION['restaurant_choice'] = $restChoice;
         $sql = "SELECT R.rname FROM Restaurants R WHERE R.rid = '$restChoice'";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
