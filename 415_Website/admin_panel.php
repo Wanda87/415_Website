@@ -116,7 +116,7 @@
     ?>
 
   // Loop through data and generate table rows
-managersData.forEach(function(manager) {                                                                                                          
+managersData.forEach(function(manager) {
   managersTable += "<tr data-entry-id='m" + manager.mid + "'><td>" + manager.mid + "</td><td>" + manager.username + "</td><td>" + manager.name + "</td><td><a class='delete-btn' href='delete_entry.php?mid=" + manager.mid + "'>Delete</a></td></tr>";
 
 });
@@ -136,22 +136,21 @@ managersData.forEach(function(manager) {
   var requestsTable = "<table><thead><tr><th>Restaurant Name</th><th>Manager Name</th><th>Description</th><th>Health Inspection Documents</th><th>Action</th></tr></thead><tbody>";
   
   <?php
-    $sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck  P.prid FROM PendingRestaurant P";
+    $sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck FROM PendingRestaurant P";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result) != 0) {
         echo "var requestsData = [";
         while ($row = $result->fetch_assoc()) {
-            echo "{ 'restaurantName': '". $row["rname"] ."', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] ."'},"; 
+            echo "{ 'restaurantName': '". $row["rname"] . "', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] ."'},"; 
         }
         echo "];";
     }
-    ?> //<data-entry-id='r'   href=delete entry.php?prid=" + request.prid + "' data-prid='  href=delete entry.php?prid" + request.prid + "'> href=delete entry.php?prid=" + request.prid +"</button><
+    ?>
 
   // Loop through data and generate table rows
-  requestsData.forEach(function(requests) {                                                                                                                                                     //"</td><td><a class='delete-btn' href='delete_entry.php?cid=" + user.cid + "'>Delete</a></td></tr>";
+  requestsData.forEach(function(request, index) {
+    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + "</td><td><button class='accept-btn' data-prid='" + index + "'>Accept</button><button class='deny-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</button></td></tr>";
 
-    requestsTable += "<tr data-entry-id='r" + requests.prid + "'><td>" + requests.rname + "</td><td>" + requests.roname + "</td><td>" + requests.rdesc + "</td><td>" + requests.docCheck + "</td><td> <a class='accept-btn'>Accept</a> <a class='deny-btn' href='delete_entry.php?prid=" + requests.prid +" data-entry-id='r'>Deny</button> </td></tr>";
-    
   });
   requestsTable += "</tbody></table>";
   // Update requestsContent with generated table
@@ -200,10 +199,7 @@ document.querySelectorAll(".delete-btn").forEach(function(btn) {
             url = "delete_entry.php?mid=" + entryId.substring(1);
         } else if (entryId.startsWith("r")) {
             // For request deletion
-           
             url = "delete_entry.php?prid=" + entryId.substring(1);
-         
-        
         } else {
             // Handle error if entryId is neither cid, mid, nor rid
             console.error("Invalid entry ID format:", entryId);
@@ -221,10 +217,10 @@ document.querySelectorAll(".accept-btn").forEach(function(btn) {
         var row = this.closest("tr"); // Get the closest row
         var restaurantName = row.querySelector("td:first-child").innerText; // Get the restaurant name
         var description = row.querySelector("td:nth-child(3)").innerText; // Get the description
-
+        var prid = row.dataset.prid; // Get the request ID
 
         // Redirect to accept_request.php with parameters to handle insertion into Restaurants table
-        window.location.href = "accept_request.php?rname=" + encodeURIComponent(restaurantName) + "&rdesc=" + encodeURIComponent(description);
+        window.location.href = "accept_request.php?rname=" + encodeURIComponent(restaurantName) + "&rdesc=" + encodeURIComponent(description) + "&prid=" + prid;
     });
 });
 

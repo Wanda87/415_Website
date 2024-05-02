@@ -51,7 +51,7 @@ if(isset($_GET['cid'])) {
   elseif(isset($_GET['prid'])) {
   // Delete entry from managers table
   $prid = $_GET['prid'];
-
+  
   // Prepare statement
   $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE prid = ?");
   $stmt->bind_param("i", $prid); // "i" indicates integer type
@@ -73,4 +73,5 @@ if(isset($_GET['cid'])) {
 header("Location: admin_panel.php");
 exit; // Ensure script execution stops after redirection
 ?>
+
 
