@@ -1,6 +1,13 @@
 <DOCTYPE html>
 <?php
 session_start();
+$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "logout.php") {
+    header("location: logout.php");
+} else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "logout.php") {
+    header("location: login.php");
+}
 
 
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))

@@ -7,24 +7,26 @@
     $username = 'admin';
     $password = 'password';
     $dbname = 'softwareproject';
-
+    $mid = $_SESSION['mid'];
     $conn = mysqli_connect($servername, $username, $password, $dbname);
+    
     if ($conn -> connect_error){
         die("Connection Failed:" .mysqli_connect_error());
     }
-   
+    $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out"; 
+    if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "menuItem.php"){
+        header("location: menuItem.php");
+        
+    }else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "menuItem.php"){
+        header("location: login.php");
+    }
 
-    $mid = $_SESSION['mid'];
+    
     $get_rid = $conn->query("SELECT rid FROM Restaurants WHERE mid = $mid");
     $result = $get_rid->fetch_assoc();
     $rid = $result['rid'];
     
-    $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out"; 
-    if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "menuItem.php"){
-        header("location: menuItem.php");
-    }else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "menuItem.php"){
-        header("location: login.php");
-    }
+   
     //$rid = 1; // THIS IS JUST FOR TESTING! We need to carry over the manager's mid to get the associated rid
 
     if(isset($_POST['submit']))

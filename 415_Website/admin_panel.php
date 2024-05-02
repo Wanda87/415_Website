@@ -10,6 +10,9 @@
   if ($conn->connect_error) {
       die("Connection Failed:" . mysqli_connect_error());
   }
+  $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+    
   if($loggedin == "admin" && basename($_SERVER['PHP_SELF']) != "admin_panel.php") {
     header("location: admin_panel.php");
 } else if ($loggedin != "admin" && basename($_SERVER['PHP_SELF']) == "admin_panel.php") {
