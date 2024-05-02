@@ -224,9 +224,6 @@ document.querySelectorAll(".accept-btn").forEach(function(btn) {
     });
 });
 
-
-
-
   </script>
 </body>
 </html>
