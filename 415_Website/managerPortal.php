@@ -5,6 +5,7 @@
 
 <?php
     session_start();
+    $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
 
     if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "managerPortal.php"){
         header("location: managerPortal.php");
