@@ -5,9 +5,9 @@
 
   $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
 
-  if($_SESSION["loggedin"] == "admin" && basename($_SERVER['PHP_SELF']) != "applicationForm.php"){
-    header("location: applicationForm.ph");
-  }else if ($_SESSION["loggedin"] != "admin" && basename($_SERVER['PHP_SELF']) == "applicationForm.ph"){
+  if($_SESSION["loggedin"] == "manager" && basename($_SERVER['PHP_SELF']) != "applicationForm.php"){
+    header("location: applicationForm.php");
+  }else if ($_SESSION["loggedin"] != "manager" && basename($_SERVER['PHP_SELF']) == "applicationForm.php"){
     header("location: login.php");
   }
   
