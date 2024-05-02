@@ -3,15 +3,7 @@
                                                       applicationForm.php if logged in as manager -->
 <?php
   session_start();
-  #$loginCheck = $_SESSION['loggedin'];
-  $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
-
-  // the id being 0 represents a type of user that isn't currently logged in
-  $cid = isset($_SESSION['cid']) ? $_SESSION['cid'] : 0;
-  $mid = isset($_SESSION['mid']) ? $_SESSION['mid'] : 0;
-  $aid = isset($_SESSION['aid']) ? $_SESSION['aid'] : 0;
-
-
+  
   // Database connection
   $servername = 'databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com';
   $username = 'admin';
@@ -79,23 +71,13 @@
         Are you a restaurant manager and would you like to add your restaurant to our website?
         Please click below to fill out a form for submission!
       </p>
-
-      <form method = "POST">
-        <button type = "submit" id = "submit" name = "submit" style = "width: 35%;">Fill out a form!</button>
+      <!-- I have no idea how I'm gonna implement this, but there'll need to be some php here
+            for checking if a user is logged in as a restaurant manager before directing them
+            to applicationForm.php -->
+      <form action = "applicationForm.php">
+        <button type = "submit" style = "width: 35%;">Fill out a form!</button>
       </form>
     </div>
-
-    <?php
-      if(isset($_POST['submit']))
-      {
-        if ($cid != 0 || $aid != 0) // sends user to create a manager account if not logged in as one
-          header("Location: create_restaurant_account.php");
-        else if ($mid != 0) // sends user to application form if logged in as a manager
-          header("Location: applicationForm.php");
-        else // sends user to login page if not logged in
-          header("Location: login.php");
-      }
-    ?>
 
   </body>
 
