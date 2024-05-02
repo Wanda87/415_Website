@@ -7,6 +7,15 @@ $username = 'admin';
 $password = 'password';
 $dbname = 'softwareproject';
 
+$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+    
+if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "rating_comments_log.php") {
+    header("location: rating_comments_log.php");
+} else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "rating_comments_log.php") {
+    header("location: login.php");
+}
+
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection Failed: " . mysqli_connect_error());

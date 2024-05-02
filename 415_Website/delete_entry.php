@@ -6,6 +6,14 @@ $username = 'admin';
 $password = 'password';
 $dbname = 'softwareproject';
 
+$loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+
+if($loggedin == "admin" && basename($_SERVER['PHP_SELF']) != "delete_entry.php") {
+    header("location: delete_entry.php");
+} else if ($loggedin != "admin" && basename($_SERVER['PHP_SELF']) == "delete_entry.php") {
+    header("location: login.php");
+}
+
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection Failed:" . mysqli_connect_error());
