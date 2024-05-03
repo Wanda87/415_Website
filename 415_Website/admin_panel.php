@@ -49,7 +49,7 @@
     <a href="#" class="button" id="usersBtn">Users</a>
     <a href="#" class="button" id="managersBtn">Restaurant Managers</a>
     <a href="#" class="button" id="requestsBtn">Requests</a>
-    <a href="log out.php" class="button" id="requestsBtn">Log out</a>
+    <a href="logout.php" class="button" id="requestsBtn">Log out</a>
   </div>
 
   <div class="popup">
@@ -232,13 +232,11 @@ document.querySelectorAll(".delete-btn").forEach(function(btn) {
 
 document.querySelectorAll(".accept-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
-        var row = this.closest("tr"); // Get the closest row
-        var restaurantName = row.querySelector("td:first-child").innerText; // Get the restaurant name
-        var description = row.querySelector("td:nth-child(3)").innerText; // Get the description
+
         var prid = row.dataset.prid; // Get the request ID
 
         // Redirect to accept_request.php with parameters to handle insertion into Restaurants table
-        window.location.href = "accept_request.php?rname=" + encodeURIComponent(restaurantName) + "&rdesc=" + encodeURIComponent(description) + "&prid=" + prid;
+        window.location.href = "accept_request.php?prid=" + prid;
     });
 });
 
