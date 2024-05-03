@@ -108,6 +108,7 @@ table, th, td {
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
+  border: none;
 }
 
 .share-opinion-button:hover {
