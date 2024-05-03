@@ -21,9 +21,6 @@ if ($conn->connect_error) {
     die("Connection Failed: " . mysqli_connect_error());
 }
 
-//$average_rating = $_SESSION['$averating'];
-
-
 // Correct header location redirects
 $cid = isset($_SESSION['cid']) ? $_SESSION['cid'] : 0;
 if (isset($_POST['share'])) {
@@ -121,7 +118,7 @@ if (isset($_POST['share'])) {
                 $_SESSION['avg_rating'] = $result['averating'];
                 $ave_rating = number_format($_SESSION['avg_rating'], 1, '.', '');
                 //}
-                echo "<p>Average Rating: " . $ave_rating . "</p>";
+                echo "<p>Average Rating: " . $ave_rating . " / 5</p>";
             ?>
         </div>
 
