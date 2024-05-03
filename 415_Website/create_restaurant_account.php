@@ -4,6 +4,7 @@ $servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "password";
 $database = "softwareproject";
+$passMatch = False;
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -17,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass =  $_POST['password'];
     $confirmPass = $_POST['confirm_password'];
 
-    if ($pass !== $confirmPass) {
-        echo "Passwords do not match";
+    if ($pass != $confirmPass) {
+       $passMatch = True;
     } else {
 
         $check = $conn->prepare("SELECT cname FROM Customers WHERE cuser = ?");
@@ -95,6 +96,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br></br>
         </a>
     <?php endif; ?>
+
+    <?php if (isset($passMatch) && $passMatch): ?>
+        <a href="#" class="notification">
+            <span>Passwords do not match. 
+                Please Try Again</span>
+            <span class="badge"></span>
+           
+        </a>
+        <br></br>
+    <?php endif; ?>
+
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
      
         <label for="manager_name">Manager Name:</label>

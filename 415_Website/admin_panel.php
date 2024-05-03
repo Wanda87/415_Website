@@ -34,7 +34,7 @@
  <!-- Container for success messages -->
  <?php if(isset($_SESSION['delete_message'])): ?>
     <div class="success-message" id="successMessage">
-        <?php echo $_SESSION['delete_message']; ?>
+        <?php print $_SESSION['delete_message']; ?>
     </div>
     <?php unset($_SESSION['delete_message']); // Clear the message after displaying ?>
 <?php endif; ?>
