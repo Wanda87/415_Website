@@ -21,6 +21,16 @@
   if ($conn->connect_error) {
       die("Connection Failed: " . mysqli_connect_error());
   }
+
+  if(isset($_POST['submit']))
+  {
+    if ($cid != 0 || $aid != 0) // sends user to create a manager account if not logged in as one
+      header("Location: create_restaurant_account.php");
+    else if ($mid != 0) // sends user to application form if logged in as a manager
+      header("Location: applicationForm.php");
+    else // sends user to login page if not logged in
+      header("Location: login.php");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -154,19 +164,6 @@
         <button type="submit" id="submit" name="submit">Fill out a form!</button>
       </form>
     </div>
-
-    <?php
-      if(isset($_POST['submit']))
-      {
-        if ($cid != 0 || $aid != 0) // sends user to create a manager account if not logged in as one
-          header("Location: create_restaurant_account.php");
-        else if ($mid != 0) // sends user to application form if logged in as a manager
-          header("Location: applicationForm.php");
-        else // sends user to login page if not logged in
-          header("Location: login.php");
-      }
-    ?>
-
   </body>
 
 </html>
