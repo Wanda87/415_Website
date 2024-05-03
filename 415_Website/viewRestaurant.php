@@ -20,22 +20,13 @@ if ($conn->connect_error) {
     die("Connection Failed:" . mysqli_connect_error());
 }
 
-// Initialize average rating to N/A if no restaurant is selected
-$average_rating = 'N/A';
 
 // Calculate average rating only if a restaurant is selected
 if (isset($_POST['restaurants'])) {
     $restChoice = $_POST['restaurants'];
+    $_SESSION['restChoice'] = $restChoice;
 
-    // Calculate average rating logic here...
-
-    // Sample ratings (replace this with actual rating calculation logic)
-    $sample_ratings = [4, 3, 5, 2, 4]; // Sample ratings array
-    $average_rating = array_sum($sample_ratings) / count($sample_ratings); // Calculate average rating
 }
-
-// Set the average rating as a session variable
-$_SESSION['average_rating'] = $average_rating;
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +74,7 @@ $_SESSION['average_rating'] = $average_rating;
 </script>
 
 <div class="container">
-<form action="rating_comments_log.php" method="post">
+<form method="post">
     <!-- Page will be directed to result -->
     <label for="restaurants">Select a Restaurant: </label>
     <?php
@@ -97,10 +88,19 @@ $_SESSION['average_rating'] = $average_rating;
         while ($row = $result->fetch_assoc()) {
             echo "<option value='" . $row["rid"] . "'>" . $row["rname"] . "</option>";
         }
-        echo "</select> <input type='submit' name='submit' value='SEARCH'/>";
+        echo "</select> <input type='submit' name='submit' id = 'submit' value='SEARCH'/>";
     }
+
     ?>
 </form>
+
+<?php
+    if(isset($_POST['submit'])){
+        $restchoice = $_POST['restaurants'];
+        $_SESSION['restChoice'] = $restchoice;
+        header("Location: rating_comments_log.php");
+    }
+?>
 
 </div>
 

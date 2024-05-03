@@ -21,12 +21,8 @@ if ($conn->connect_error) {
     die("Connection Failed: " . mysqli_connect_error());
 }
 
-// Sample ratings (replace this with actual rating calculation logic)
-$sample_ratings = [4, 3, 5, 2, 4]; // Sample ratings array
-$average_rating = array_sum($sample_ratings) / count($sample_ratings); // Calculate average rating
+$average_rating = $_SESSION['$averating'];
 
-// Set the average rating as a session variable
-$_SESSION['average_rating'] = $average_rating;
 
 // Correct header location redirects
 $cid = isset($_SESSION['cid']) ? $_SESSION['cid'] : 0;
@@ -67,8 +63,7 @@ if (isset($_POST['share'])) {
     <div class="restaurant-list">
         <?php // displaying restaurant item table:
         // grabbing the name based off of $restChoice
-        $restChoice = $_POST['restaurants'];
-        $_SESSION['restaurant_choice'] = $restChoice;
+        $restChoice = $_SESSION['restChoice'];
         $sql = "SELECT R.rname FROM Restaurants R WHERE R.rid = '$restChoice'";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
@@ -114,7 +109,20 @@ if (isset($_POST['share'])) {
 
          <!-- Average rating display -->
         <div class="average-rating">
-            <p>Average Rating: <?php echo $average_rating; ?></p>
+            <?php
+                $get_rating = $conn-> query("SELECT AVG(rating) AS averating FROM UserComment WHERE rid = $restChoice");
+                $result = $get_rating->fetch_assoc();
+                //echo $result['averating'];
+                //$statement->bind_param("i", $restChoice);
+                //if($statement->execute()){
+                    //$row = $statement->fetch_assoc();
+                    //echo $row;
+                    //$ave_rating = $row['averating'];
+                $_SESSION['avg_rating'] = $result['averating'];
+                $ave_rating = $_SESSION['avg_rating'];
+                //}
+                echo "<p>Average Rating: " . $ave_rating . "</p>";
+            ?>
         </div>
 
         <div>
@@ -132,7 +140,7 @@ if (isset($_POST['share'])) {
         <!-- Display comments fetched from the database -->
         <div class="comments">
             <?php
-            $sql = "SELECT U.cid, U.comments, C.cname FROM UserComment U, Customers C WHERE U.cid = C.cid AND U.rid = '$restChoice'";
+            $sql = "SELECT comments, cid FROM UserComment WHERE rid = '$restChoice'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
