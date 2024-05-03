@@ -63,7 +63,10 @@
     <img src="close.png" alt="Close" class="close">
   </div>
 
-  
+  <div class="confirmation-container" id="confirmationMessage">
+  Entry deleted successfully.
+  </div>
+
 
 
   <script>
@@ -198,6 +201,7 @@ document.querySelectorAll(".delete-btn").forEach(function(btn) {
      var entryId = this.closest("tr").dataset.entryId;
 
 
+<<<<<<< HEAD
      // Determine if it's a user, manager, or request entry and construct the URL accordingly
      var url;
      print(url)
@@ -222,6 +226,18 @@ document.querySelectorAll(".delete-btn").forEach(function(btn) {
  });
 });
 
+=======
+        // Redirect to the constructed URL
+        window.location.href = url;
+
+        // After successful deletion
+        document.getElementById('confirmationMessage').classList.add('show');
+    });
+});
+
+
+
+>>>>>>> 0c91a5725972c851ff5a7a61d71a3b2b2d18df5c
 document.querySelectorAll(".accept-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
         var row = this.closest("tr"); // Get the closest row
