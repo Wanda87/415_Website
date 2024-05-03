@@ -68,13 +68,14 @@ body {
 
 }
 
-.popup-content{
-  height: 250px;
+.popup-content {
+  height: 250px; /* Adjust the height as needed */
   width: 500px;
   background: #fff;
   padding: 20px;
   border-radius: 5px;
   position: relative;
+  overflow-y: auto; /* Add vertical scrolling */
 }
 
 .popup-content table { /*make table take up the entire popup window*/
@@ -91,6 +92,7 @@ body {
 .popup-content th { /*add a different color to the header*/ 
   background-color: #C66864; /* Pinkish background color */
   color: #fff; /* Text color */
+  
 }
 
 .popup-content tbody tr:hover {
