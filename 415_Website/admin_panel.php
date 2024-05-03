@@ -49,7 +49,7 @@
     <a href="#" class="button" id="usersBtn">Users</a>
     <a href="#" class="button" id="managersBtn">Restaurant Managers</a>
     <a href="#" class="button" id="requestsBtn">Requests</a>
-    <a href="logout.php" class="button" id="requestsBtn">Log out</a>
+    <a href="log out.php" class="button" id="requestsBtn">Log out</a>
   </div>
 
   <div class="popup">
@@ -153,8 +153,9 @@ managersData.forEach(function(manager) {
 
   // Loop through data and generate table rows
   requestsData.forEach(function(request, index) {
-    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + "</td><td><button class='accept-btn' data-prid='" + index + "'>Accept</button><button class='deny-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</button></td></tr>";
-
+    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + 
+    "</td><td><button class='accept-btn' data-entry-id='r" + index +"'data-prid='" + index + "'>Accept</button></td><td><button class='delete-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</button></td></tr>";
+  
   });
   requestsTable += "</tbody></table>";
   // Update requestsContent with generated table
@@ -188,33 +189,38 @@ managersData.forEach(function(manager) {
     }
 
 // Add event listeners for delete buttons in users and managers popup windows
+
 document.querySelectorAll(".delete-btn").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-        // Get the ID of the entry to be deleted (cid or mid)
-        var entryId = this.closest("tr").dataset.entryId;
+ 
+ btn.addEventListener("click", function() {
+    entryId.substring(1);
+     // Get the ID of the entry to be deleted (cid or mid)
+     var entryId = this.closest("tr").dataset.entryId;
 
-        // Determine if it's a user, manager, or request entry and construct the URL accordingly
-        var url;
-        if (entryId.startsWith("c")) {
-            // For user deletion
-            url = "delete_entry.php?cid=" + entryId.substring(1);
-        } else if (entryId.startsWith("m")) {
-            // For manager deletion
-            url = "delete_entry.php?mid=" + entryId.substring(1);
-        } else if (entryId.startsWith("r")) {
-            // For request deletion
-            url = "delete_entry.php?prid=" + entryId.substring(1);
-        } else {
-            // Handle error if entryId is neither cid, mid, nor rid
-            console.error("Invalid entry ID format:", entryId);
-            return; // Exit function to prevent further execution
-        }
 
-        // Redirect to the constructed URL
-        window.location.href = url;
-    });
+     // Determine if it's a user, manager, or request entry and construct the URL accordingly
+     var url;
+     print(url)
+     if (entryId.startsWith("c")) {
+         // For user deletion
+         url = "delete_entry.php?cid=" + entryId.substring(1);
+     } else if (entryId.startsWith("m")) {
+         // For manager deletion
+         url = "delete_entry.php?mid=" + entryId.substring(1);
+     } else if (entryId.startsWith("r")) {
+         // For request deletion
+         console.log("hello");
+         url = "delete_entry.php?prid=" + entryId.substring(1);
+     } else {
+         // Handle error if entryId is neither cid, mid, nor rid
+         console.error("Invalid entry ID format:", entryId);
+         return; // Exit function to prevent further execution
+     }
+
+     // Redirect to the constructed URL
+     window.location.href = url;
+ });
 });
-
 
 document.querySelectorAll(".accept-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
