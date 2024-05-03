@@ -47,7 +47,6 @@ $loggedin = "logged out";
         <a href = "login.php">Login</a>
         <a href = "create_account.php">Create an Account</a>
         <a href = "aboutUs.php">About Us</a>
-        <a href = "viewRestaurant.php">View Restaurants</a>
         </div>
 
         <div style = "margin: 20px; text-align: center;">
