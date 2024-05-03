@@ -107,27 +107,3 @@ body {
   margin-bottom: 20px;
   text-align: center;
 }
-
-
-
-
-.rating-box .stars {
-  display: flex;
-  justify-content: center; /*center stars horizontally regarless of resizing if text area*/
-  /*align-items: center;*/
-  gap: 25px;
-}
-
-
-.stars i {
-  color: #e6e6e6; /*color of stars before selecting*/
-  font-size: 35px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.stars i.active {
-  color: #C66864;
-}
-
-

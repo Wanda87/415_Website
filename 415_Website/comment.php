@@ -1,3 +1,16 @@
+<?php
+  session_start();
+
+  $loggedin = isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : "logged out";
+    
+  if($loggedin != "logged out" && basename($_SERVER['PHP_SELF']) != "comment.php") {
+      header("location: comment.php");
+  } else if ($loggedin == "logged out" && basename($_SERVER['PHP_SELF']) == "comment.php") {
+      header("location: login.php");
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +29,12 @@
   <div class="rating-box">
     <header>How was your experience?</header>
     <form id="rating-form" action="rating_comments_log.php" method="post">
-      <textarea id="comment-box" name="comment" placeholder="Add your comment here..." rows="4"></textarea>
+      <textarea id="comment-box" name="comment-box" placeholder="Add your comment here..." rows="4"></textarea>
       <button type="submit">Submit</button>
     </form>
   </div>
+
+  
 
 </body>
 </html>
