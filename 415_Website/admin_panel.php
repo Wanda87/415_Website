@@ -143,12 +143,12 @@ managersData.forEach(function(manager) {
   var requestsTable = "<table><thead><tr><th>Restaurant Name</th><th>Manager Name</th><th>Description</th><th>Health Inspection Documents</th><th>Action</th></tr></thead><tbody>";
   
   <?php
-    $sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck FROM PendingRestaurant P";
+    $sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck, P.prid FROM PendingRestaurant P";
     $result = $conn->query($sql);
-    if (mysqli_num_rows($result) != 0) {
+    if ($result && $result->num_rows > 0) {
         echo "var requestsData = [";
         while ($row = $result->fetch_assoc()) {
-            echo "{ 'restaurantName': '". $row["rname"] . "', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] ."'},"; 
+            echo "{ 'restaurantName': '". $row["rname"] . "', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] . "', 'prid': '". $row["prid"] . "'},";
         }
         echo "];";
     }
@@ -156,8 +156,11 @@ managersData.forEach(function(manager) {
 
   // Loop through data and generate table rows
   requestsData.forEach(function(request, index) {
-    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents + 
-    "</td><td><button class='accept-btn' data-entry-id='r" + index +"'data-prid='" + index + "'>Accept</button></td><td><button class='delete-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</button></td></tr>";
+    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents +  "</td><td><a class = 'accept-btn' href='accept_request.php?prid=" + request.prid + "'>Accept</a> <a class='delete-btn' href='delete_entry.php?prid=" + request.prid + "'>Delete</a></td></tr>";
+    
+    
+    //<a class='accept-btn' data-entry-id='r" + index +"'data-prid='" + index + "'>Accept</a></td><td><a class='delete-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</a></td></tr>";  <a class='delete-btn' href='delete_entry.php?prid=" + request.prid + "'>Delete</a></td></tr>";
+    
   
   });
   requestsTable += "</tbody></table>";
@@ -196,15 +199,12 @@ managersData.forEach(function(manager) {
 document.querySelectorAll(".delete-btn").forEach(function(btn) {
  
  btn.addEventListener("click", function() {
-    entryId.substring(1);
+   
      // Get the ID of the entry to be deleted (cid or mid)
      var entryId = this.closest("tr").dataset.entryId;
-
-
-
      // Determine if it's a user, manager, or request entry and construct the URL accordingly
      var url;
-     print(url)
+
      if (entryId.startsWith("c")) {
          // For user deletion
          url = "delete_entry.php?cid=" + entryId.substring(1);

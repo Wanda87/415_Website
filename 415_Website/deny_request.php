@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 if(isset($_GET['prid'])) {
   // Delete entry from PendingRestaurant table
   $entryId = $_GET['prid'];
-  
+  print( $entryId );
   // Prepare statement
   $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE requestId = ?");
   $stmt->bind_param("i", $entryId); 

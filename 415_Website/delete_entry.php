@@ -48,20 +48,22 @@ if(isset($_GET['cid'])) {
     $stmt->close();
 } 
 
-  elseif(isset($_GET['prid'])) {
-  // Delete entry from managers table
-  $prid = $_GET['prid'];
+elseif(isset($_GET['prid'])) {
+    
+    $prid = $_GET['prid']; // Assign the value of prid from the URL parameter to $prid
   
-  // Prepare statement
-  $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE prid = ?");
-  $stmt->bind_param("i", $prid); // "i" indicates integer type
-  if ($stmt->execute()) {
-      $_SESSION['delete_message'] = 'Request deleted successfully.';
-  } else {
-      $_SESSION['delete_message'] = 'Error deleting request: ' . $conn->error;
-  }
-  $stmt->close();
-} 
+    // Prepare statement to delete entry from PendingRestaurant table
+    $stmt = $conn->prepare("DELETE FROM PendingRestaurant WHERE prid = ?");
+    $stmt->bind_param("i", $prid); // "i" indicates integer type
+    $stmt->execute();
+    if ($stmt->execute()) { // Execute the prepared statement
+        $_SESSION['delete_message'] = 'Request deleted successfully.'; // Set success message if deletion is successful
+    } else {
+        $_SESSION['delete_message'] = 'Error deleting request: ' . $conn->error; // Set error message if deletion fails
+    }
+    $stmt->close(); // Close the prepared statement
+    echo($prid);
+}
 
 
   else {
@@ -70,7 +72,7 @@ if(isset($_GET['cid'])) {
 }
 
 // After deletion is complete, redirect back to the admin panel page
-header("Location: admin_panel.php");
+header("location: admin_panel.php");
 exit; // Ensure script execution stops after redirection
 ?>
 
