@@ -139,31 +139,28 @@ managersData.forEach(function(manager) {
 
     document.getElementById("requestsBtn").addEventListener("click", function(){
 
-      // Generate table content for requests
-  var requestsTable = "<table><thead><tr><th>Restaurant Name</th><th>Manager Name</th><th>Description</th><th>Health Inspection Documents</th><th>Action</th></tr></thead><tbody>";
-  
-  <?php
-    $sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck, P.prid FROM PendingRestaurant P";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        echo "var requestsData = [";
-        while ($row = $result->fetch_assoc()) {
-            echo "{ 'restaurantName': '". $row["rname"] . "', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] . "', 'prid': '". $row["prid"] . "'},";
-        }
-        echo "];";
-    }
-    ?>
 
-  // Loop through data and generate table rows
-  requestsData.forEach(function(request, index) {
-    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents +  "</td><td><a class = 'accept-btn' href='accept_request.php?prid=" + request.prid + "'>Accept</a> <a class='delete-btn' href='delete_entry.php?prid=" + request.prid + "'>Delete</a></td></tr>";
-    
-    
-    //<a class='accept-btn' data-entry-id='r" + index +"'data-prid='" + index + "'>Accept</a></td><td><a class='delete-btn' data-entry-id='r" + index + "' data-prid='" + index + "'>Deny</a></td></tr>";  <a class='delete-btn' href='delete_entry.php?prid=" + request.prid + "'>Delete</a></td></tr>";
-    
-  
-  });
-  requestsTable += "</tbody></table>";
+var requestsTable = "<div class='table-wrapper'><table><thead><tr><th>Restaurant Name</th><th>Manager Name</th><th>Description</th><th>Documentation?</th><th colspan='2'>Action</th></tr></thead><tbody>";
+
+<?php
+$sql = "SELECT P.rname, P.roname, P.rdesc, P.docCheck, P.prid FROM PendingRestaurant P";
+$result = $conn->query($sql);
+if ($result && $result->num_rows > 0) {
+    echo "var requestsData = [";
+    while ($row = $result->fetch_assoc()) {
+        echo "{ 'restaurantName': '". $row["rname"] . "', 'managerName': '" . $row["roname"] . "', description: '" .$row["rdesc"] . "', 'documents': '" . $row["docCheck"] .  "', 'prid': '". $row["prid"] . "'},";
+    }
+    echo "];";
+}
+?>
+
+// Loop through data and generate table rows
+requestsData.forEach(function(request, index) {
+    requestsTable += "<tr data-entry-id='r" + index + "'><td>" + request.restaurantName + "</td><td>" + request.managerName + "</td><td>" + request.description + "</td><td>" + request.documents +  "</td><td><a class='accept-btn' href='accept_request.php?prid=" + request.prid + "'>Accept</a></td><td> <a class='delete-btn' href='delete_entry.php?prid=" + request.prid + "'>Delete</a></td></tr>";
+});
+
+requestsTable += "</tbody></table></div>";
+
   // Update requestsContent with generated table
   document.getElementById("requestContent").innerHTML = requestsTable;
   
