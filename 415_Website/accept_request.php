@@ -1,28 +1,32 @@
 <?php
-session_start();
-$loggedin = isset($_SESSION["loggedin"]) ? $_SESSION["loggedin"] : "logged out";
+// Establish database connection
+$servername = "databaseprojectrahhhh.ctk6a08mqegz.us-east-2.rds.amazonaws.com";
+$username = "admin";
+$password = "password";
+$dbname = "softwareproject";
 
-if($loggedin == "admin" && basename($_SERVER['PHP_SELF']) != "accept_request.php") {
-    header("location: accept_request.php");
-} else if ($loggedin == "admin" && basename($_SERVER['PHP_SELF']) == "accept_request.php") {
-    header("location: login.php");
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if parameters are provided
-if(isset($_GET['rname']) && isset($_GET['rdesc'])) {
-    $rname = $_GET['rname'];
-    $rdesc = $_GET['rdesc'];
+// Retrieve parameters from URL
+$restaurantName = $_GET['rname'];
+$description = $_GET['rdesc'];
+$prid = $_GET['prid'];
 
-   //insert sql code here
+// Insert the accepted request into the database
+$sql = "INSERT INTO Restaurants (rname, rdesc) VALUES ('$restaurantName', '$description')";
 
-    // Redirect back to admin panel with success message
-    $_SESSION['accept_message'] = "Restaurant '$rname' accepted and added to Restaurants table.";
+if ($conn->query($sql) === TRUE) {
+    // Redirect back to the admin panel or another appropriate page
     header("Location: admin_panel.php");
-    exit;
+    exit();
 } else {
-    // Error handling if parameters are not provided
-    $_SESSION['accept_message'] = "Error: Restaurant name or description not provided.";
-    header("Location: admin_panel.php");
-    exit;
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+$conn->close();
 ?>

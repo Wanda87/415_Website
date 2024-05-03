@@ -62,7 +62,10 @@
     <img src="close.png" alt="Close" class="close">
   </div>
 
-  
+  <div class="confirmation-container" id="confirmationMessage">
+  Entry deleted successfully.
+  </div>
+
 
 
   <script>
@@ -211,8 +214,12 @@ document.querySelectorAll(".delete-btn").forEach(function(btn) {
 
         // Redirect to the constructed URL
         window.location.href = url;
+
+        // After successful deletion
+        document.getElementById('confirmationMessage').classList.add('show');
     });
 });
+
 
 
 document.querySelectorAll(".accept-btn").forEach(function(btn) {
