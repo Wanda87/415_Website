@@ -12,6 +12,9 @@ body {
 
 
 
+
+
+
 .header img {
   height: 80px; /* Adjust the height of the logo as needed */
   display: inline-block; /*Display the logo next to the brand name*/
@@ -20,21 +23,27 @@ body {
 
 
 
+
+
+
 .container{
-  
+ 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center; 
+  text-align: center;
 }
 
+
 .container h2{
+
 
   color:#fff;
   font-size: 36px;
   margin-bottom: 40px;
 }
+
 
 .button{
   background: #fff;
@@ -50,10 +59,12 @@ body {
   transition: 0.4s;
 }
 
+
 .button:hover{
   background:#C66864;
   color: #fff;
 }
+
 
 .popup{
   background: rgba(0,0,0,0.6);
@@ -64,9 +75,11 @@ body {
   display: none;
   justify-content: center;
   align-items: center;
-  
+ 
+
 
 }
+
 
 .popup-content {
   height: 250px; /* Adjust the height as needed */
@@ -78,10 +91,12 @@ body {
   overflow-y: auto; /* Add vertical scrolling */
 }
 
+
 .popup-content table { /*make table take up the entire popup window*/
   width: 100%;
   border-collapse: collapse;
 }
+
 
 .popup-content th, .popup-content td {/*place content in the center*/
   padding: 10px;
@@ -89,15 +104,17 @@ body {
   color: #C66864; /* Pinkish text color */
 }
 
-.popup-content th { /*add a different color to the header*/ 
+
+.popup-content th { /*add a different color to the header*/
   background-color: #C66864; /* Pinkish background color */
   color: #fff; /* Text color */
-  
 }
+
 
 .popup-content tbody tr:hover {
   background-color: #f2f2f2; ; /* Hover color */
 }
+
 
 .popup.requests-popup .popup-content {
   width: auto; /* Allow the width to adjust based on content */
@@ -105,9 +122,12 @@ body {
 }
 
 
+
+
 .container{
   width: 90%; /*adjust to screen size*/
 }
+
 
 .close{
   position:absolute;
@@ -121,6 +141,7 @@ body {
   cursor: pointer;
 }
 
+
 /* Style for accept and deny buttons */
 .accept-btn, .deny-btn {
   padding: 5px 10px;
@@ -130,6 +151,7 @@ body {
   transition: background-color 0.3s;
 }
 
+
 /* Style for accept button */
 .accept-btn {
   background-color: #4CAF50; /* Green */
@@ -137,10 +159,12 @@ body {
   margin-right: 10px; /* Add right margin for spacing */
 }
 
+
 /* Hover style for accept button */
 .accept-btn:hover {
   background-color: #45a049; /* Darker green */
 }
+
 
 /* Style for deny button */
 .deny-btn {
@@ -148,10 +172,12 @@ body {
   color: white;
 }
 
+
 /* Hover style for deny button */
 .deny-btn:hover {
   background-color: #da190b; /* Darker red */
 }
+
 
 /* Style for delete button */
 .delete-btn {
@@ -164,10 +190,12 @@ body {
   transition: background-color 0.3s;
 }
 
+
 /* Hover style for delete button */
 .delete-btn:hover {
   background-color: #b5565e; /* Darker pink */
 }
+
 
 /* Add a container for the confirmation message */
 .confirmation-container {
@@ -184,7 +212,11 @@ body {
   display: none; /* Initially hide it */
 }
 
+
 /* Show the confirmation message */
 .show {
   display: block;
 }
+
+
+
