@@ -1,2 +1,1 @@
-# This is the code we got for our group project!
-# (So far at least)
+# The code for a website made for a Spring 2024 project
